@@ -1,0 +1,81 @@
+<div class="review-card mt-3">
+    <div class="review-body">
+        <!-- <h6>
+            @<%= review.author.username %>
+              
+        </h6> -->
+        <div class="review-header">
+    <div class="review-user">
+
+        <div class="review-avatar">
+            <%= review.author.username.charAt(0).toUpperCase() %>
+        </div>
+
+        <div class="review-user-info">
+            <h6 class="review-username">
+                @<%= review.author.username %></h6>
+                <%if(!review.replyTo && review.rating != undefined){ %>
+            <span
+            class="review-rating starability-result card-text"
+            data-rating="<%= review.rating %>"></span>
+            <%} %>
+            
+        </div>
+        </div>
+        </div>
+        
+        <p class="reply-text">
+            <% if(review.replyTo){ %>
+            <span class="reply-mention">
+                   @<%= review.replyTo.username %>
+            </span><% } %>
+        <%= review.comment %>
+        </p>
+
+       <% if(currUser){ %><!-- buttons -->
+            <button
+            class="btn btn-sm btn-outline-dark mb-2"
+            data-bs-toggle="collapse"
+            data-bs-target="#replyForm-<%= review._id %>">Reply</button>
+         <% } %>
+
+        <% if(currUser && currUser._id.equals(review.author._id)){ %>
+           <form
+            class="d-inline"
+            action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+            method="POST">
+               <button class="btn btn-sm btn-dark mb-2">Delete</button></form>
+        <% } %></div>
+
+    <div class="collapse ms-3 me-3 mb-3" id="replyForm-<%= review._id %>"><!-- reply form -->
+        <form
+        action="/listings/<%= listing._id %>/reviews/<%= review._id %>/reply"
+        method="POST">
+            <textarea
+            name="review[comment]"
+            class="form-control mb-2"
+            rows="2"
+            required
+            placeholder="Write reply..."></textarea>
+
+            <!-- <input
+            type="hidden"
+            name="review[rating]"
+            value="5"> -->
+
+            <button class="btn btn-sm btn-dark mb-2">Submit Reply</button>
+        </form>
+
+    </div>
+    <% if(review.replies && review.replies.length > 0){ %> <!-- child replies -->
+        <div class="reply-thread">
+            <% for(let child of review.replies){ %>
+            <%- include("../includes/replyCard.ejs",
+                {
+                    review:child,
+                    listing,
+                    currUser
+                }) %>
+            <% } %>
+        </div><% } %>
+    </div> 
