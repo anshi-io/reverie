@@ -1,13 +1,12 @@
 <% layout("/layouts/boilerplate") %>
-<style>
-/* MAIN PAGE */
+<!-- <style>
+
 .show-container {
     max-width: 1050px;
     margin: 40px auto;
     padding: 0 20px;
 }
 
-/* HEADER */
 .show-header {
     margin-bottom: 20px;
 }
@@ -32,7 +31,7 @@ gap:40px;
 
 }
 
-/* IMAGE */
+
 .listing-gallery {
     border-radius: 16px;
     overflow: hidden;
@@ -45,7 +44,6 @@ gap:40px;
     border-radius: 16px;
 }
 
-/* CONTENT */
 .show-content {
     padding: 10px 0;
 }
@@ -72,7 +70,7 @@ gap:40px;
     gap: 10px;
 }
 
-/* BUTTONS */
+
 .action-bar {
     display: flex;
     gap: 10px;
@@ -96,7 +94,7 @@ gap:40px;
     border: none;
 }
 
-/* REVIEWS */
+
 .reviews-section {
     margin-top: 50px;
 }
@@ -105,7 +103,7 @@ gap:40px;
     margin-bottom: 20px;
 }
 
-/* MAP */
+
 .map-section {
     margin-top: 50px;
 }
@@ -115,7 +113,7 @@ gap:40px;
     border-radius: 16px;
     overflow: hidden;
 }
-</style>
+</style> -->
 <script>
     const mapToken = "<%=process.env.MAP_TOKEN%>";
     const listing = <%- JSON.stringify(listing) %>;
