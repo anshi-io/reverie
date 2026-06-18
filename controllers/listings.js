@@ -101,8 +101,8 @@ module.exports.showListing=async(req,res)=>{
     const similarListings = await Listing.find({
     categories: listing.categories,
     _id: { $ne: listing._id }
-})
-.limit(3);
+    })
+    .limit(3);
     res.render("listings/show.ejs",{listing,similarListings});
    
 };

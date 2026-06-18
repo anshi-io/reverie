@@ -6,7 +6,7 @@ const passport = require("passport");
 const { saveRedirectUrl } = require("../middleware.js");
 const userController = require("../controllers/user.js");
 router.get("/", (req,res)=>{
-    res.render("listings/index.ejs");
+    res.render("/listings");
 });
 router.route("/signup")
 .get(userController.renderSignup)

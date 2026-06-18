@@ -228,7 +228,67 @@ data-bs-slide="next">
     <p class="price">
         ₹<%= listing.price.toLocaleString("en-IN") %>
     </p>
+    <div class="trip-card mt-4">
 
+<h5>Stay Planner</h5>
+
+<div class="mb-3">
+
+<label class="form-label">
+
+Number of Nights
+
+</label>
+
+<input
+type="number"
+id="nights"
+class="form-control"
+min="1"
+value="1"
+>
+
+</div>
+
+<div class="cost-row">
+
+<span>Subtotal</span>
+
+<strong id="subtotal">
+
+₹<%= listing.price.toLocaleString("en-IN") %>
+
+</strong>
+
+</div>
+
+<div class="cost-row">
+
+<span>Taxes (18%)</span>
+
+<strong id="taxes">
+
+₹<%= Math.round(listing.price*0.18).toLocaleString("en-IN") %>
+
+</strong>
+
+</div>
+
+<hr>
+
+<div class="cost-row total-row">
+
+<span>Total</span>
+
+<strong id="total">
+
+₹<%= Math.round(listing.price*1.18).toLocaleString("en-IN") %>
+
+</strong>
+
+</div>
+
+</div>
     <div class="meta">
         <span><%= listing.location %></span>
         <span><%= listing.country %></span>
@@ -378,6 +438,57 @@ alt="listing image"
 
 </div>
 </main>
+<script>
+
+const nightlyPrice = <%= listing.price %>;
+
+const nightsInput =
+document.getElementById("nights");
+
+const subtotal =
+document.getElementById("subtotal");
+
+const taxes =
+document.getElementById("taxes");
+
+const total =
+document.getElementById("total");
+
+if(nightsInput){
+
+nightsInput.addEventListener("input",()=>{
+
+let nights =
+parseInt(nightsInput.value);
+
+if(!nights || nights < 1){
+
+nights = 1;
+
+nightsInput.value = 1;
+
+}
+
+const sub = nightlyPrice * nights;
+
+const tax = Math.round(sub * 0.18);
+
+const finalTotal = sub + tax;
+
+subtotal.textContent =
+"₹" + sub.toLocaleString("en-IN");
+
+taxes.textContent =
+"₹" + tax.toLocaleString("en-IN");
+
+total.textContent =
+"₹" + finalTotal.toLocaleString("en-IN");
+
+});
+
+}
+
+</script>
 <script src="/js/map.js"></script>
     
    
