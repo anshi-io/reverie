@@ -93,9 +93,6 @@ app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
 app.use("/",userRouter);
 
-app.listen(8080,()=>{
-    console.log("server is listening to port 8080");
-});
 
 app.use((req,res,next)=>{
     console.log("404 URL:", req.originalUrl);
@@ -103,8 +100,12 @@ app.use((req,res,next)=>{
 });
 
 app.use((err,req,res,next)=>{
-
     console.log(err);
        let{statusCode=500,message="Something went wrong!!"} =err;
        res.status(statusCode).render("error.ejs",{ message });
 })
+
+
+app.listen(process.env.PORT || 8080,()=>{
+    console.log("server is listening to port 8080");
+});
