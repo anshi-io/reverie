@@ -459,91 +459,129 @@ margin-bottom:1.5rem;
 
 margin-bottom:1rem;
 } 
+*/
 /* =========================
    GLOBAL
 ========================= */
 
-body{
-    font-family:"Plus Jakarta Sans", sans-serif !important;
-    color:#222222;
-    background:#ffffff;
-    display:flex;
-    flex-direction:column;
-    min-height:100vh;
+*{
+    box-sizing:border-box;
 }
+
+
+body{
+
+    font-family:"Plus Jakarta Sans",sans-serif !important;
+
+    color:#222;
+
+    background:#fff;
+
+}
+
 
 main{
+
     flex:1;
+
 }
 
-.container{
-    flex:1;
-}
+
 
 a{
+
     color:inherit;
+
 }
+
 
 
 /* =========================
-   NAVBAR
+NAVBAR
 ========================= */
+
 
 .navbar{
 
-    height:5rem;
-    background:white !important;
+
+    min-height:5rem;
+
+    background:#fff !important;
 
     border-bottom:1px solid #eeeeee;
 
     padding:0 2rem;
 
-    z-index:1000;
+
 }
 
 
+
 .fa-house-flag{
+
 
     color:#ff5e7a;
 
     font-size:2rem;
 
-    transition:.2s;
+
+}
+
+
+
+
+.navbar-toggler{
+
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+
 }
 
 
-.fa-house-flag:hover{
 
-    transform:scale(1.05);
+.navbar-toggler:focus{
+
+
+    box-shadow:none;
+
 
 }
+
 
 
 .nav-link{
 
-    color:#222 !important;
 
-    font-weight:500;
+    color:#222!important;
 
-    margin-left:.8rem;
+    font-weight:600;
+
 
 }
+
 
 
 .nav-link:hover{
 
-    color:#ff5e7a !important;
+
+    color:#ff5e7a!important;
+
 
 }
 
 
 
+
 /* =========================
-   SEARCH BAR
+SEARCH
 ========================= */
 
 
 .search-bar{
+
 
     display:flex;
 
@@ -555,53 +593,30 @@ a{
     height:48px;
 
 
-    background:white;
+    border:1px solid #ddd;
 
-    border:1px solid #dddddd;
-
-    border-radius:999px;
+    border-radius:50px;
 
 
-    padding:.3rem .4rem .3rem 1rem;
+    padding:.3rem .5rem .3rem 1rem;
 
 
-    box-shadow:
-    0 2px 8px rgba(0,0,0,.08);
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
 
-
-    transition:.25s;
 
 }
 
-
-
-.search-bar:hover{
-
-    box-shadow:
-    0 5px 15px rgba(0,0,0,.12);
-
-}
 
 
 .search-input{
 
+
+    border:none!important;
+
+    outline:none!important;
+
     flex:1;
 
-    border:none !important;
-
-    outline:none !important;
-
-    background:transparent;
-
-
-    font-size:.95rem;
-
-}
-
-
-.search-input::placeholder{
-
-    color:#717171;
 
 }
 
@@ -609,13 +624,12 @@ a{
 
 .divider{
 
+
     width:1px;
 
-    height:24px;
+    height:25px;
 
-    background:#dddddd;
-
-    margin-right:10px;
+    background:#ddd;
 
 }
 
@@ -626,31 +640,18 @@ a{
 
     border:none;
 
-    border-radius:50px;
-
 
     background:#ff5e7a;
+
 
     color:white;
 
 
-    height:40px;
+    border-radius:50px;
 
 
-    padding:0 1.1rem;
+    padding:.6rem 1.2rem;
 
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-
-    gap:.4rem;
-
-
-    transition:.25s;
 
 }
 
@@ -658,86 +659,16 @@ a{
 
 .btn-search:hover{
 
-    background:#e94c67;
 
-    transform:scale(1.03);
+    background:#e94d68;
+
 
 }
-
 
 
 
 /* =========================
-   FOOTER
-========================= */
-
-
-.f-info{
-
-
-    height:8rem;
-
-    background:#f7f7f7;
-
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    justify-content:center;
-
-    align-items:center;
-
-
-    text-align:center;
-
-}
-
-
-
-.f-info-links a{
-
-    text-decoration:none;
-
-    color:#222;
-
-}
-
-
-.f-info-links a:hover{
-
-    text-decoration:underline;
-
-}
-
-
-.f-info-links,
-.f-info-smedia,
-.f-info-brand{
-
-    width:100%;
-
-    display:flex;
-
-    justify-content:center;
-
-}
-
-
-
-.f-info-smedia i{
-
-    font-size:1.2rem;
-
-    margin-right:.7rem;
-
-}
-
-
-
-
-/* =========================
-   FILTERS
+FILTERS
 ========================= */
 
 
@@ -746,15 +677,14 @@ a{
 
     display:flex;
 
-    justify-content:center;
-
     align-items:center;
 
 
     gap:2rem;
 
 
-    margin-top:1.5rem;
+    padding:1rem 0;
+
 
 }
 
@@ -762,7 +692,9 @@ a{
 
 #filters a{
 
+
     text-decoration:none;
+
 
 }
 
@@ -771,7 +703,11 @@ a{
 .filter{
 
 
+    min-width:70px;
+
+
     text-align:center;
+
 
     color:#717171;
 
@@ -779,16 +715,25 @@ a{
     opacity:.8;
 
 
-    transition:.25s;
+}
+
+
+
+.filter i{
+
+
+    font-size:1.3rem;
 
 
 }
 
 
 
-.filter:hover{
+.filter p{
 
-    opacity:1;
+
+    font-size:.8rem;
+
 
 }
 
@@ -796,15 +741,18 @@ a{
 
 .filter.active{
 
+
     color:#222;
 
     opacity:1;
+
 
 }
 
 
 
 .filter.active::after{
+
 
     content:"";
 
@@ -818,86 +766,41 @@ a{
     background:#222;
 
 
-    margin-top:5px;
-
 }
 
 
 
-.filter i{
-
-    font-size:1.3rem;
-
-    margin-bottom:.4rem;
-
-}
-
-
-.filter p{
-
-    font-size:.8rem;
-
-}
-
-
-
-/* TAX */
 
 .tax-toggle{
 
 
-    border:1px solid #dddddd;
+    border:1px solid #ddd;
 
 
     border-radius:30px;
 
 
-    height:45px;
+    padding:.7rem 1rem;
 
 
-    padding:.5rem 1rem;
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    gap:.5rem;
+    margin-left:auto;
 
 
 }
 
-
-
-
-.tax-info{
-
-    display:none;
-
-    color:#ff385c;
-
-}
 
 
 
 /* =========================
-   LISTING CARDS
+INDEX LISTING CARDS
 ========================= */
 
 
 .listing-link{
 
+
     text-decoration:none;
 
-}
-
-
-
-#listing-container{
-
-    margin-top:2rem !important;
 
 }
 
@@ -906,22 +809,16 @@ a{
 .listing-card{
 
 
-    border:none !important;
+    border:none!important;
 
 
-    border-radius:18px;
+    border-radius:20px;
 
 
     overflow:hidden;
 
 
-    background:white;
-
-
-    transition:.25s;
-
-
-    margin-bottom:2rem;
+    transition:.3s;
 
 
 }
@@ -931,7 +828,7 @@ a{
 .listing-card:hover{
 
 
-    transform:translateY(-6px);
+    transform:translateY(-5px);
 
 
     box-shadow:
@@ -943,19 +840,17 @@ a{
 
 
 
+
 .card-img-top{
 
 
-    height:18rem;
-
-
-    width:100% !important;
+    height:280px;
 
 
     object-fit:cover;
 
 
-    border-radius:18px !important;
+    width:100%;
 
 
 }
@@ -965,7 +860,7 @@ a{
 .card-body{
 
 
-    padding:1rem 0 !important;
+    padding:1rem 0!important;
 
 
 }
@@ -975,53 +870,24 @@ a{
 .card-text{
 
 
-    color:#222;
-
     line-height:1.6;
 
-}
-
-
-
-.card-text b{
-
-    font-size:1rem;
 
 }
 
-
-
-.card-img-overlay{
-
-
-    opacity:0;
-
-
-}
-
-
-.card-img-overlay:hover{
-
-
-    opacity:.15;
-
-    background:white;
-
-}
 
 
 
 
 /* =========================
-   SHOW PAGE
+SHOW PAGE
 ========================= */
-
 
 
 .show-container{
 
 
-    max-width:1100px;
+    max-width:1200px;
 
 
     margin:40px auto;
@@ -1037,7 +903,7 @@ a{
 .listing-title{
 
 
-    font-size:2rem;
+    font-size:2.3rem;
 
 
     font-weight:700;
@@ -1052,33 +918,43 @@ a{
 
     color:#717171;
 
-}
 
-
-
-.show-layout{
-
-
-    display:grid;
-
-
-    grid-template-columns:2fr 1fr;
-
-
-    gap:40px;
+    margin-bottom:2rem;
 
 
 }
 
+
+
+
+/* IMAGE FIRST */
+
+.listing-gallery{
+
+
+    width:100%;
+
+
+    border-radius:25px;
+
+
+    overflow:hidden;
+
+
+    margin-bottom:3rem;
+
+
+}
 
 
 
 .carousel{
 
 
-    border-radius:20px;
+    border-radius:25px;
 
     overflow:hidden;
+
 
 }
 
@@ -1087,30 +963,87 @@ a{
 .show-img{
 
 
-    height:430px;
-
-
     width:100%;
+
+
+    height:600px;
 
 
     object-fit:cover;
 
+
 }
+
+
+
+
+/* AFTER IMAGE */
+
+
+.show-layout{
+
+
+    display:grid;
+
+
+    grid-template-columns:1.5fr 1fr;
+
+
+    gap:45px;
+
+
+    align-items:start;
+
+
+}
+
+
+
+
+/* LEFT CONTENT */
+
+
+.show-content{
+
+
+    padding:0;
+
+
+}
+
 
 
 
 .host{
 
 
-    font-size:1rem;
+    background:white;
+
+
+    border:1px solid #eeeeee;
+
+
+    border-radius:20px;
+
+
+    padding:1.5rem;
+
+
+    box-shadow:
+
+    0 5px 18px rgba(0,0,0,.06);
+
 
 }
 
 
 
+
 .host span{
 
+
     font-weight:700;
+
 
 }
 
@@ -1119,34 +1052,54 @@ a{
 .description{
 
 
-    color:#555;
+    background:white;
+
+
+    border:1px solid #eeeeee;
+
+
+    border-radius:20px;
+
+
+    padding:1.5rem;
+
+
+    margin-top:1.5rem;
 
 
     line-height:1.8;
 
 
-}
-
-
-
-
-.price{
-
-
-    font-size:1.4rem;
-
-
-    font-weight:700;
+    color:#555;
 
 
 }
 
 
 
-/* BOOKING CARD */
+
+
+/* RIGHT BOOKING */
 
 
 .trip-card{
+
+
+    background:white;
+
+
+    border:1px solid #ddd;
+
+
+    border-radius:22px;
+
+
+    padding:1.8rem;
+
+
+    box-shadow:
+
+    0 12px 35px rgba(0,0,0,.1);
 
 
     position:sticky;
@@ -1155,21 +1108,17 @@ a{
     top:100px;
 
 
-    background:white;
+}
 
 
-    padding:1.5rem;
+
+.trip-card h5{
 
 
-    border-radius:20px;
+    font-weight:700;
 
 
-    border:1px solid #eeeeee;
-
-
-    box-shadow:
-
-    0 10px 30px rgba(0,0,0,.08);
+    font-size:1.4rem;
 
 
 }
@@ -1185,26 +1134,41 @@ a{
     justify-content:space-between;
 
 
-    margin-bottom:.8rem;
+    margin:1rem 0;
 
 
 }
-
 
 
 
 .total-row{
 
 
-    font-size:1.1rem;
+    font-size:1.2rem;
+
 
     font-weight:700;
+
 
 }
 
 
 
+
 /* BUTTONS */
+
+
+.action-bar{
+
+
+    display:flex;
+
+
+    gap:1rem;
+
+
+}
+
 
 
 .btn-primary-action{
@@ -1216,7 +1180,7 @@ a{
     color:white;
 
 
-    padding:.7rem 1.2rem;
+    padding:.7rem 1.3rem;
 
 
     border-radius:12px;
@@ -1238,20 +1202,22 @@ a{
     color:white;
 
 
-    border:none;
-
-
-    padding:.7rem 1.2rem;
+    padding:.7rem 1.3rem;
 
 
     border-radius:12px;
+
+
+    border:none;
+
 
 }
 
 
 
+
 /* =========================
-   REVIEWS
+REVIEWS
 ========================= */
 
 
@@ -1270,22 +1236,21 @@ a{
     padding:1.2rem;
 
 
-    box-shadow:
-
-    0 3px 12px rgba(0,0,0,.05);
+    margin-bottom:1rem;
 
 
 }
 
 
 
+
 .review-avatar{
 
 
-    width:45px;
-
-
     height:45px;
+
+
+    width:45px;
 
 
     border-radius:50%;
@@ -1300,10 +1265,10 @@ a{
     display:flex;
 
 
-    align-items:center;
-
-
     justify-content:center;
+
+
+    align-items:center;
 
 
     font-weight:700;
@@ -1311,27 +1276,6 @@ a{
 
 }
 
-
-
-
-.review-username{
-
-
-    font-weight:600;
-
-}
-
-
-
-.reply-text{
-
-
-    color:#555;
-
-
-    line-height:1.7;
-
-}
 
 
 
@@ -1344,7 +1288,7 @@ a{
     padding-left:1rem;
 
 
-    border-left:2px solid #eeeeee;
+    border-left:2px solid #eee;
 
 
 }
@@ -1352,31 +1296,32 @@ a{
 
 
 
+
 /* =========================
-   MAP
+MAP
 ========================= */
 
 
 #map{
 
 
-    height:400px;
-
-
     width:100%;
 
 
-    border-radius:20px;
+    height:450px;
 
 
-    overflow:hidden;
+    border-radius:25px;
+
 
 }
 
 
 
+
+
 /* =========================
-   RESPONSIVE
+RESPONSIVE
 ========================= */
 
 
@@ -1388,6 +1333,7 @@ a{
 
         grid-template-columns:1fr;
 
+
     }
 
 
@@ -1395,27 +1341,18 @@ a{
     .trip-card{
 
 
-        position:static;
-
-    }
+        position:relative;
 
 
-    #filters{
+        top:0;
 
-
-        justify-content:flex-start;
-
-
-        overflow-x:auto;
-
-
-        scrollbar-width:none;
 
     }
 
 
 
 }
+
 
 
 
@@ -1427,13 +1364,16 @@ a{
 
         padding:0 1rem;
 
+
     }
+
 
 
     .search-bar{
 
 
         width:100%;
+
 
         margin:1rem 0;
 
@@ -1442,46 +1382,21 @@ a{
 
 
 
-    .btn-search span{
-
-        display:none;
-
-    }
-
-
-
-    .btn-search{
-
-
-        width:40px;
-
-        padding:0;
-
-    }
-
-
-
-    .divider{
-
-        display:none;
-
-    }
-
-
-
     #filters{
 
 
-        flex-wrap:nowrap;
+        overflow-x:auto;
 
     }
 
 
 
-    .show-container{
+
+    .show-img{
 
 
-        margin-top:20px;
+        height:350px;
+
 
     }
 
@@ -1489,26 +1404,11 @@ a{
 
     .listing-title{
 
-        font-size:1.5rem;
+
+        font-size:1.7rem;
+
 
     }
-
-
-
-    .show-img{
-
-        height:280px;
-
-    }
-
-
-    .reply-thread{
-
-
-        margin-left:1rem;
-
-    }
-
 
 
 }
@@ -1521,20 +1421,30 @@ a{
     .card-img-top{
 
 
-        height:15rem;
+        height:240px;
+
 
     }
 
 
-    .f-info{
+
+    .show-img{
 
 
-        height:auto;
+        height:280px;
 
-        padding:2rem 0;
 
     }
 
+
+
+    .review-card{
+
+
+        padding:1rem;
+
+
+    }
 
 
 }
