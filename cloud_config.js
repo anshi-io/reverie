@@ -7,16 +7,7 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET
 });
 
-// const storage = new CloudinaryStorage({
-//   cloudinary: cloudinary,
-//   params: {
-//     folder: 'reverie_DEV',
-//     allowedformats: ['png', 'jpg','jpeg'], // supports promises as well
-// }
-// });
-
 module.exports = {
     cloudinary,
-//     storage,
 }
 

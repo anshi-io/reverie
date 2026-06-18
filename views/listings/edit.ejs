@@ -1,79 +1,279 @@
 <% layout("/layouts/boilerplate") %>
-<body>
-    <div class="row mt-3">
-    <div class="col-8 offset-2">
-  
-    <H3>EDIT YOUR LISTING</H3>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
-        <div class="mb-3" >
-            <label for="title form-label">Title</label>
-            <input name="listing[title]" value="<%=listing.title%>" type="text" class="form-control" required>
-            <div class="invalid-feedback">Enter Title</div>
-        </div>
-        
-        <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea name="listing[description]" type="text" class="form-control" required><%=listing.description%></textarea>
-            <div class="invalid-feedback">Please enter short description about your title</div>
-        </div>
-        
-        <!-- <div class="mb-3">
-            <img src="<%#= originalImageUrl%>"/>
-        </div> -->
-        <div class="mb-3">
-            <label for="image" class="form-label">Upload New Image</label>
-            <input name="listing[images]"  value="<%=listing.image.url%>" type="file" class="form-control" accept=".jpg,.jpeg,.png">
-            <div class="invalid-feedback">>Invalid image format. Only JPG, JPEG, and PNG files are supported.*</div>
-
-        </div>
+<div class="row mt-3">
+<div class="col-8 offset-2">
+     <h3>EDIT YOUR LISTING</h3>
+    <div class="mb-4">
+      <label class="form-label">Existing Images</label>
         <div class="row">
-        <div class="mb-3 col-md-4">
-            <label for="price" class="form-label ">Price</label>
-            <input name="listing[price]"  value="<%=listing.price%>" type="number" class="form-control" required>
-            <div class="invalid-feedback">Enter valid Price</div>
-        </div>
-        
-        <div class="mb-3 col-md-8">
-            <label for="location" class="form-label ">Location</label>
-            <input name="listing[location]" value="<%=listing.location%>"type="text" class="form-control" required>
-            <div class="invalid-feedback">Enter valid location</div>
-        </div>
-        </div>
-        
-        <div class="mb-3">
-            <label for="country" class="form-label">Country</label>
-            <input name="listing[country]"  value="<%=listing.country%>" type="text" class="form-control" required>
-            <div class="invalid-feedback">Enter valid country</div>
-        </div>
-        
-        <br>
-    <div class="mb-3">
-    <label class="form-label">Category</label>
+           <% listing.images.forEach((img)=>{ %>
+              <div class="col-md-3 mb-3">
+                    <img 
+                       src="<%= img.url %>"
+                       class="img-fluid rounded"
+                       style="height:150px;width:100%;object-fit:cover;">
+                    <form method="POST" action="/listings/<%=listing._id%>/images/<%=encodeURIComponent(img.filename)%>?_method=DELETE">
 
-    <select
-    name="listing[category]"
-    class="form-select"
-    required
-    >
-    <% categories.forEach(category=>{ %>
+                        <button type="submit" class="btn btn-danger btn-sm mt-2">Delete</button>
 
-    <option 
-    value="<%=category._id%>"
-    <%#= listing.category.equals(category._id) ? "selected" : "" %>
-    <%= String(listing.category) === String(category._id) ? "selected" : "" %>
-    >
-    <%=category.name%>
-    </option>
-    <% }) %>
-   </select>  
-   </div>
+                    </form>
 
-    <div class="invalid-feedback">
-        Please select a category.
-    </div>
-        <br><br>
-        <button class="btn btn-dark edit-btn mt-3">EDIT</button>
-    </form>
-    </div>
-    </div>
-</body>
+                </div>
+
+                <% }) %>
+
+            </div>
+
+        </div>
+
+        <form method="POST" action="/listings/<%=listing._id%>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
+
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+
+                <input name="listing[title]" value="<%=listing.title%>" type="text" class="form-control" required>
+
+                <div class="invalid-feedback">Enter title</div>
+
+
+</div>
+
+
+
+
+
+<div class="mb-3">
+
+
+<label class="form-label">
+Description
+</label>
+
+
+<textarea
+
+name="listing[description]"
+
+class="form-control"
+
+required
+
+><%=listing.description%></textarea>
+
+
+<div class="invalid-feedback">
+Enter description
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- NEW MULTIPLE IMAGES -->
+
+<div class="mb-3">
+
+
+<label class="form-label">
+
+Upload New Images
+
+</label>
+
+
+
+<input
+
+name="listing[images]"
+
+type="file"
+
+class="form-control"
+
+accept="image/*"
+
+multiple
+
+
+>
+
+
+</div>
+
+
+
+
+
+<div class="row">
+
+
+<div class="mb-3 col-md-4">
+
+
+<label class="form-label">
+
+Price
+
+</label>
+
+
+<input
+
+name="listing[price]"
+
+value="<%=listing.price%>"
+
+type="number"
+
+class="form-control"
+
+required
+
+>
+
+
+</div>
+
+
+
+
+
+<div class="mb-3 col-md-8">
+
+
+<label class="form-label">
+
+Location
+
+</label>
+
+
+<input
+
+name="listing[location]"
+
+value="<%=listing.location%>"
+
+type="text"
+
+class="form-control"
+
+required
+
+>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="mb-3">
+
+
+<label class="form-label">
+
+Country
+
+</label>
+
+
+<input
+
+name="listing[country]"
+
+value="<%=listing.country%>"
+
+type="text"
+
+class="form-control"
+
+required
+
+>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="mb-3">
+
+
+<label class="form-label">
+
+Category
+
+</label>
+
+
+
+<select
+
+name="listing[categories]"
+
+class="form-select"
+
+required
+
+>
+
+
+<% categories.forEach(category=>{ %>
+
+
+<option
+
+value="<%=category._id%>"
+
+<%= String(listing.categories) === String(category._id) ? "selected" : "" %>
+
+>
+
+<%=category.name%>
+
+
+</option>
+
+
+<% }) %>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+<button
+
+class="btn btn-dark mt-3 edit-btn mb-2"
+
+>
+
+EDIT
+
+</button>
+
+
+
+</form>
+
+
+</div>
+</div>

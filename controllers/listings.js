@@ -11,15 +11,10 @@ module.exports.index = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = 9;
     const skip = (page - 1) * limit;
-
     const search = req.query.search?.trim();
     const category = req.query.category; 
 
     let filter = {};
-
-    // if(req.query.category){
-    // filter.categories = req.query.category;
-    // }
      if (category && category !== "all") {
         filter.categories = category; // must be ObjectId from frontend
     }
@@ -53,22 +48,17 @@ module.exports.loadMore = async (req, res) => {
     const search = req.query.search?.trim();
 
     let filter = {};
-
-//    if(req.query.category){
-//     filter.categories = req.query.category;
-// }
-if (category && category !== "all") {
+    if (category && category !== "all") {
         filter.categories = category; // must be ObjectId from frontend
     }
-
-if(search){
+    if(search){
     filter.$or = [
         { title: { $regex: search, $options: "i" } },
         { location: { $regex: search, $options: "i" } },
         { country: { $regex: search, $options: "i" } },
         { description: { $regex: search, $options: "i" } }
     ];
-}
+    }
 
     const listings = await Listing.find(filter)
         .skip((page - 1) * limit)
@@ -108,62 +98,92 @@ module.exports.showListing=async(req,res)=>{
         req.flash("error","Listing you requested for does not exist!!");
         return res.redirect("/listings");
     }
-    res.render("listings/show.ejs",{listing});
+    const similarListings = await Listing.find({
+    categories: listing.categories,
+    _id: { $ne: listing._id }
+})
+.limit(3);
+    res.render("listings/show.ejs",{listing,similarListings});
    
 };
-// module.exports.createListing = async(req,res,next)=>{
-//     const imageHash = crypto
-//     .createHash("md5")
-//     .update(req.file.buffer)
-//     .digest("hex");
-// //    console.log("NEW IMAGE HASH:", imageHash);
-//     const existingListing = await Listing.findOne({
-//         category:req.body.listing.category,
-//         imageHash:imageHash
-//     });
-// // console.log("FOUND DUPLICATE:", existingListing);
-//     if(existingListing){
-//         req.flash(
-//             "error",
-//             "This image already exists in this category"
-//         );
-//         return res.redirect("/listings/new");
-//     }
-//     const result = await new Promise((resolve, reject)=>{
-//     const stream = cloudinary.uploader.upload_stream(
-//         {
-//             folder:"reverie_DEV"
-//         },
-//         (error,result)=>{
-//             if(error){
-//                 reject(error);
-//             }else{
-//                 resolve(result);
-//             }
-//         }
-//     );
-//     stream.end(req.file.buffer);
-// });
-//     let response = await geocodingClient.forwardGeocode({
-//         query:req.body.listing.location,
-//         limit:1
-//     })
-//     .send();
-//     const newListing = new Listing(req.body.listing);
-//     newListing.owner=req.user._id;
-//     newListing.image={
-//         url:result.secure_url,
-//         filename:result.public_id
-//     };
-//     newListing.imageHash=imageHash;
-//     newListing.geometry=response.body.features[0].geometry;
-//     await newListing.save();
-//     req.flash(
-//         "success",
-//         "New Listing Created!!"
-//     );
-//     res.redirect("/listings");
-// };
+
+module.exports.createListing = async(req,res)=>{
+let response = await geocodingClient
+.forwardGeocode({
+query:req.body.listing.location,
+limit:1
+})
+.send();
+
+let newListing = new Listing(req.body.listing);
+newListing.owner=req.user._id;
+let images=[];
+let hashes=[];
+
+for(let file of req.files){
+const hash =
+crypto
+.createHash("md5")
+.update(file.buffer)
+.digest("hex");
+
+if(hashes.includes(hash)){
+req.flash(
+"error",
+"Same image selected multiple times"
+);
+return res.redirect("/listings/new");
+
+}
+
+let existing =
+await Listing.findOne({
+imageHashes:hash
+});
+
+if(existing){
+req.flash(
+"error",
+"Image already exists in another listing"
+);
+return res.redirect("/listings/new");
+}
+
+let result =
+await new Promise((resolve,reject)=>{
+let stream =
+cloudinary.uploader.upload_stream(
+{
+folder:"reverie_DEV"
+},
+(error,result)=>{
+if(error)
+reject(error);
+
+else
+resolve(result);
+}
+);
+stream.end(file.buffer);
+});
+images.push({
+url:result.secure_url,
+filename:result.public_id
+});
+hashes.push(hash);
+}
+newListing.images=images;
+newListing.imageHashes=hashes;
+newListing.geometry =
+response.body.features[0].geometry;
+await newListing.save();
+
+req.flash(
+"success",
+"Listing created"
+);
+res.redirect("/listings");
+}
 
 module.exports.renderEditform=async(req,res)=>{
     let {id}=req.params;
@@ -177,72 +197,104 @@ module.exports.renderEditform=async(req,res)=>{
 };
 
 module.exports.updateListing=async(req,res)=>{
-    let {id}=req.params;
-    let listing = await Listing.findById(id);
-      Object.assign(listing, req.body.listing);
+let {id}=req.params;
+let listing = await Listing.findById(id);
+Object.assign(
+listing,
+req.body.listing
+);
 
-    const response = await geocodingClient
-        .forwardGeocode({
-            query: listing.location,
-            limit: 1,
-        })
-        .send();
+let response = await geocodingClient
+.forwardGeocode({
+query:listing.location,
+limit:1
+})
+.send();
 
-    listing.geometry = response.body.features[0].geometry;
+listing.geometry=response.body.features[0].geometry;
+if(req.files && req.files.length > 0){
+for(let file of req.files){
+const hash = crypto
+.createHash("md5")
+.update(file.buffer)
+.digest("hex");
 
-    // if(typeof req.file !=="undefined"){
-    // let url=req.file.path;
-    // let filename= req.file.filename;
-    // listing.image={url,filename};
-    if(typeof req.file !== "undefined"){
+let existing = await Listing.findOne({
+imageHashes:hash,
+_id:{
+$ne:id
+}
+});
 
-    const imageHash = crypto
-    .createHash("md5")
-    .update(req.file.buffer)
-    .digest("hex");
-    const existingListing = await Listing.findOne({
-        categories: listing.categories,
-        imageHash:imageHash,
-        _id: {$ne:id}
-    });
+if(existing){
+req.flash(
+"error",
+"Duplicate image detected."
+);
+return res.redirect(`/listings/${id}/edit`);
+}
 
-    if(existingListing){
-        req.flash(
-            "error",
-            "This image already exists in this category"
-        );
-        return res.redirect(`/listings/${id}/edit`);
-     }
-    const result = await new Promise((resolve,reject)=>{
-        const stream = cloudinary.uploader.upload_stream(
-            {
-                folder:"reverie_DEV"
-            },
-            (error,result)=>{
-                if(error){
-                    reject(error);
-                }
-                else{
-                    resolve(result);
-                }
-            });
-        stream.end(req.file.buffer);
-    });
-    listing.imageHash = imageHash;
-    listing.image = {
-        url:result.secure_url,
-        filename:result.public_id
-    };
-    }
-    await listing.save();
-    req.flash("success","Listing Updated!!");
-    res.redirect(`/listings/${id}`);
+let result = await new Promise((resolve,reject)=>{
+const stream =
+cloudinary.uploader.upload_stream(
+{
+folder:"reverie_DEV"
+},
+(error,result)=>{
+if(error)
+reject(error);
+else
+resolve(result);
+}
+);
+stream.end(file.buffer);
+});
+listing.images.push({
+url:result.secure_url,
+filename:result.public_id
+});
+
+listing.imageHashes.push(hash);
+}
+}
+await listing.save();
+req.flash("success","Listing Updated!!");
+
+res.redirect(`/listings/${id}`);
 };
 
 module.exports.deleteListing=async(req,res)=>{
-   let {id}=req.params;
-   let deletedListing=await Listing.findByIdAndDelete(id);
-   console.log(deletedListing);
-   req.flash("success","Listing Deleted!!");
-   res.redirect("/listings");
+
+    let {id}=req.params;
+    let listing=await Listing.findById(id);
+
+    for(let img of listing.images){
+        await cloudinary.uploader.destroy(img.filename);
+    }
+
+    await Listing.findByIdAndDelete(id);
+    req.flash("success","Listing Deleted Successfully");
+    res.redirect("/listings");
+}
+
+module.exports.deleteImage = async(req,res)=>{
+    let {id,filename}=req.params;
+    filename = decodeURIComponent(filename);
+    let listing = await Listing.findById(id);
+    let image = listing.images.find(
+        (img)=>img.filename === filename
+    );
+
+    if(image){
+       await cloudinary.uploader.destroy(
+       image.filename
+    );
+}
+    listing.images =listing.images.filter(
+        (img)=>img.filename !== filename
+    );
+    await listing.save();
+
+    req.flash("success","Image deleted");
+    res.redirect(`/listings/${id}/edit`);
 };

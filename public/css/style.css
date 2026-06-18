@@ -346,3 +346,126 @@ height:420px;
 object-fit:cover;
 
 }
+.trip-card{
+
+position:sticky;
+
+top:100px;
+
+background:white;
+
+padding:1.5rem;
+
+border-radius:20px;
+
+border:1px solid #ececec;
+
+box-shadow:
+0 8px 24px rgba(0,0,0,.08);
+}
+
+.trip-card h5{
+
+font-weight:600;
+
+margin-bottom:1rem;
+}
+
+.cost-row{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-bottom:.75rem;
+}
+
+.total-row{
+
+font-size:1.15rem;
+
+font-weight:700;
+}
+
+.similar-section{
+
+margin-top:4rem;
+}
+
+.similar-section .listing-card{
+
+transition:.25s;
+}
+
+.similar-section .listing-card:hover{
+
+transform:translateY(-4px);
+
+box-shadow:
+0 8px 24px rgba(0,0,0,.08);
+}
+.host-card{
+
+display:flex;
+
+align-items:center;
+
+gap:16px;
+
+padding:1.25rem;
+
+background:white;
+
+border:1px solid #ececec;
+
+border-radius:18px;
+
+box-shadow:0 4px 16px rgba(0,0,0,.05);
+
+margin-bottom:1.5rem;
+}
+
+.host-avatar{
+
+width:60px;
+
+height:60px;
+
+border-radius:50%;
+
+background:#ff5e7a;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+color:white;
+
+font-size:1.3rem;
+}
+
+.host-meta{
+
+color:#717171;
+
+font-size:.9rem;
+}
+.info-card{
+
+background:white;
+
+padding:1.5rem;
+
+border-radius:18px;
+
+border:1px solid #ececec;
+
+margin-bottom:1.5rem;
+}
+
+.info-card h5{
+
+margin-bottom:1rem;
+}

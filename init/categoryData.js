@@ -1,9 +1,7 @@
+require("dotenv").config();
 const mongoose=require("mongoose");
 const Category=require("../models/category");
-
-
-const MONGO_URL="mongodb://127.0.0.1:27017/reverie";
-
+const MONGO_URL=process.env.ATLASDB_URL;
 
 main()
 .then(()=>{
@@ -11,11 +9,9 @@ main()
 })
 .catch(err=>console.log(err));
 
-
 async function main(){
     await mongoose.connect(MONGO_URL);
 }
-
 
 const categories=[
 {
@@ -68,15 +64,14 @@ icon:"fa-gem"
 }
 ];
 
-
 async function seedDB(){
-
+await mongoose.connect(MONGO_URL);
 await Category.deleteMany({});
 
 await Category.insertMany(categories);
 
 console.log("categories added");
-
+mongoose.connection.close();
 }
 
 

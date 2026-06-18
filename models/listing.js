@@ -19,7 +19,7 @@ const listingSchema=new Schema({
     imageHashes:[
         {
     type:String,
-    required:true
+    // required:true
     }
     ],
     price:Number,
@@ -51,6 +51,9 @@ const listingSchema=new Schema({
       required: true
     }
   }
+},
+{
+    timestamps:true,
 });
 
 listingSchema.post("findOneAndDelete",async(listing)=>{

@@ -22,11 +22,14 @@
     margin-top: 4px;
 }
 
-/* LAYOUT */
-.show-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.show-layout{
+
+display:grid;
+
+grid-template-columns:2fr 1fr;
+
+gap:40px;
+
 }
 
 /* IMAGE */
@@ -118,11 +121,8 @@
     const listing = <%- JSON.stringify(listing) %>;
 </script>
 <main>
-    <!-- <div class="row mt-4 ">
-    <div class="col-8 offset-3"> -->
     <div class="show-container mt-4">
-    <!-- <h3><%#= listing.title%></h3> -->
-     <div class="show-header">
+    <div class="show-header">
     <h1 class="listing-title"><%= listing.title %></h1>
     <p class="listing-location">
         <%= listing.location %>, <%= listing.country %>
@@ -134,18 +134,6 @@
 
         <div class="show-main">
         <div class="listing-gallery">
-        <!-- <img src="<%#= listing.image.url%>" class="card-img-top show-img" alt="listing_image"></div> -->
-        <!-- <div class="card-body">
-            
-            <p class="card-text"><i><h5>Curated by &nbsp;@<%#= listing.owner.username%></h5></i></p>
-            <p class="card-text"><%#= listing.description%><br></p>
-            <p class="card-text"> &#8377;<%#= listing.price.toLocaleString("en-IN")%><br></p>
-            <p class="card-text"> <%#= listing.location%><br>
-                <%#= listing.country%><br>
-
-            </p>
-        </div> -->
-        
 <%
 let imgs = listing.images || [];
 
@@ -176,7 +164,8 @@ alt="listing_image">
 </div>
 
 
-<% if(imgs.length > 1){ %>
+
+
 
 <button class="carousel-control-prev"
 data-bs-target="#listingCarousel"
@@ -195,7 +184,7 @@ data-bs-slide="next">
 
 </button>
 
-<% } %>
+
 
 
 </div>
@@ -334,7 +323,58 @@ data-bs-slide="next">
             <div id="map"></div>
 </div>
 
+<% if(similarListings.length > 0){ %>
 
+<div class="similar-section mt-5">
+
+<h3 class="mb-4">
+You may also like
+</h3>
+
+<div class="row">
+
+<% similarListings.forEach(listing=>{ %>
+
+<div class="col-lg-4 col-md-6 mb-4">
+
+<a
+href="/listings/<%= listing._id %>"
+class="listing-link"
+>
+
+<div class="card listing-card h-100">
+
+<img
+src="<%= listing.images[0]?.url || '/images/fallback.jpg' %>"
+class="card-img-top"
+alt="listing image"
+>
+
+<div class="card-body">
+
+<b><%= listing.title %></b>
+
+<p class="mb-0">
+
+₹<%= listing.price.toLocaleString("en-IN") %>/night
+
+</p>
+
+</div>
+
+</div>
+
+</a>
+
+</div>
+
+<% }) %>
+
+</div>
+
+</div>
+
+<% } %>
 
 </div>
 </main>

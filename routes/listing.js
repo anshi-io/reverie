@@ -8,7 +8,10 @@ const multer=require("multer");
 // const{storage} = require("../cloud_config.js");
 // const upload= multer({storage});
 const upload = multer({
-    storage: multer.memoryStorage()
+    storage: multer.memoryStorage(),
+    limits:{
+       fileSize:5*1024*1024
+    }
 });
 
 
@@ -37,4 +40,10 @@ router.route("/:id")
 //edit route
 router.get("/:id/edit",isLoggedIn,isOwner,wrapAsync(listingController.renderEditform));
 
+router.delete(
+"/:id/images/:filename",
+isLoggedIn,
+isOwner,
+wrapAsync(listingController.deleteImage)
+);
 module.exports =router;
