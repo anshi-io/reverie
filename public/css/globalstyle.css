@@ -1,938 +1,861 @@
-/* =====================================
-   REVERIE GLOBAL DESIGN SYSTEM
-===================================== */
-
-:root{
-
---primary:#ff5e7a;
---primary-dark:#ff385c;
---text:#222;
---muted:#717171;
---border:#dddddd;
---bg:#f8f8f8;
-
-}
-
-
-*{
-box-sizing:border-box;
-}
-
-
-body{
-
-font-family:
--apple-system,
-BlinkMacSystemFont,
-"Segoe UI",
-Roboto,
-Arial,
-sans-serif;
-
-background:var(--bg);
-
-color:var(--text);
-
-}
-
-
-
-/* =====================================
- NAVBAR
-===================================== */
-
-
-.navbar{
-
-background:white!important;
-
-border-bottom:1px solid #eee;
-
-padding:0.8rem 2rem;
-
-}
-
-
-
-.navbar-brand i{
-
-color:var(--primary);
-
-font-size:1.5rem;
-
-}
-
-
-
-.navbar-toggler{
-
-border:1px solid #ddd!important;
-
-border-radius:10px;
-
-padding:6px 10px;
-
-}
-
-
-
-.navbar-toggler:focus{
-
-box-shadow:none;
-
-}
-
-
-
-.nav-link{
-
-font-weight:500;
-
-color:#444!important;
-
-}
-
-
-
-.nav-link:hover{
-
-color:var(--primary)!important;
-
-}
-
-
-
-
-
-/* SEARCH */
-
-
-.search-bar{
-
-height:45px;
-
-width:370px;
-
-border-radius:999px;
-
-border:1px solid var(--border);
-
-background:white;
-
-padding:5px 8px 5px 18px;
-
-display:flex;
-
-align-items:center;
-
-box-shadow:
-0 2px 8px rgba(0,0,0,.08);
-
-}
-
-
-
-.search-input{
-
-border:none!important;
-
-outline:none!important;
-
-box-shadow:none!important;
-
-flex:1;
-
-}
-
-
-
-.divider{
-
-width:1px;
-
-height:25px;
-
-background:#ddd;
-
-margin-right:10px;
-
-}
-
-
-
-.btn-search{
-
-background:var(--primary);
-
-border:none;
-
-color:white;
-
-border-radius:999px;
-
-padding:8px 16px;
-
-display:flex;
-
-gap:7px;
-
-align-items:center;
-
-}
-
-
-
-.btn-search:hover{
-
-background:var(--primary-dark);
-
-}
-
-
-
-/* =====================================
- FLASH
-===================================== */
-
-
-.alert{
-
-max-width:600px;
-
-margin:20px auto;
-
-border-radius:14px;
-
-box-shadow:
-0 5px 15px rgba(0,0,0,.08);
-
-}
-
-
-
-.alert-success{
-
-border-left:5px solid #2ecc71;
-
-}
-
-
-
-.alert-danger{
-
-border-left:5px solid #e74c3c;
-
-}
-
-
-
-/* =====================================
- INDEX FILTERS
-===================================== */
-
-
-#filters{
-
-display:flex;
-
-align-items:center;
-
-gap:28px;
-
-padding:18px 0;
-
-overflow-x:auto;
-
-}
-
-
-
-.filter{
-
-text-align:center;
-
-color:#666;
-
-min-width:70px;
-
-transition:.2s;
-
-}
-
-
-
-.filter i{
-
-font-size:22px;
-
-margin-bottom:6px;
-
-color:#555;
-
-}
-
-
-
-.filter:hover{
-
-color:var(--primary);
-
-transform:translateY(-3px);
-
-}
-
-
-
-.filter.active{
-
-color:var(--primary);
-
-font-weight:600;
-
-}
-
-
-
-
-.tax-toggle{
-
-margin-left:auto;
-
-}
-
-
-
-/* =====================================
- LISTING CARDS
-===================================== */
-
-
-.listing-card{
-
-border:none!important;
-
-border-radius:18px!important;
-
-overflow:hidden;
-
-background:white;
-
-transition:.25s;
-
-}
-
-
-
-.listing-card:hover{
-
-transform:translateY(-6px);
-
-box-shadow:
-0 12px 25px rgba(0,0,0,.12);
-
-}
-
-
-
-.listing-card img{
-
-height:260px;
-
-object-fit:cover;
-
-}
-
-
-
-.listing-link{
-
-text-decoration:none;
-
-color:inherit;
-
-}
-
-
-
-
-
-/* =====================================
- SHOW PAGE
-===================================== */
-
-
-.show-container{
-
-max-width:1200px;
-
-margin:35px auto;
-
-padding:0 20px;
-
-}
-
-
-
-.listing-title{
-
-font-size:34px;
-
-font-weight:700;
-
-}
-
-
-
-.listing-location{
-
-color:var(--muted);
-
-}
-
-
-
-
-/* FULL WIDTH GALLERY */
-
-.listing-gallery{
-
-border-radius:20px;
-
-overflow:hidden;
-
-margin-top:25px;
-
-}
-
-
-
-.show-img{
-
-width:100%;
-
-height:520px;
-
-object-fit:cover;
-
-}
-
-
-
-
-
-/* BELOW IMAGE TWO COLUMNS */
-
-
-.show-layout{
-
-display:grid;
-
-grid-template-columns:2fr 1fr;
-
-gap:35px;
-
-margin-top:35px;
-
-align-items:start;
-
-}
-
-
-
-
-
-/* LEFT INFORMATION */
-
-
-.show-content{
-
-background:white;
-
-padding:25px;
-
-border-radius:20px;
-
-box-shadow:
-0 8px 25px rgba(0,0,0,.08);
-
-}
-
-
-
-.host{
-
-font-size:18px;
-
-}
-
-
-
-.description{
-
-line-height:1.7;
-
-color:#555;
-
-}
-
-
-
-.price{
-
-font-size:24px;
-
-font-weight:700;
-
-color:var(--primary);
-
-}
-
-
-
-
-
-/* =====================================
- STAY PLANNER CARD
-===================================== */
-
-
-.trip-card{
-
-background:white;
-
-border-radius:20px;
-
-padding:25px;
-
-border:1px solid #eee;
-
-box-shadow:
-
-0 10px 30px rgba(0,0,0,.12);
-
-position:sticky;
-
-top:100px;
-
-}
-
-
-
-.trip-card h5{
-
-font-size:22px;
-
-font-weight:700;
-
-margin-bottom:20px;
-
-}
-
-
-
-.cost-row{
-
-display:flex;
-
-justify-content:space-between;
-
-margin:14px 0;
-
-}
-
-
-
-.total-row{
-
-font-size:20px;
-
-font-weight:700;
-
-}
-
-
-
-/* =====================================
- BUTTONS
-===================================== */
-
-
-.edit-btn{
-
-background:var(--primary)!important;
-
-border:none!important;
-
-color:white!important;
-
-border-radius:10px;
-
-padding:10px 20px;
-
-}
-
-
-
-.edit-btn:hover{
-
-background:var(--primary-dark)!important;
-
-}
-
-
-
-
-.delete-btn{
-
-background:#222!important;
-
-color:white!important;
-
-border-radius:10px;
-
-padding:10px 20px;
-
-}
-
-
-
-
-
-/* =====================================
- REVIEWS
-===================================== */
-
-
-.reviews-section{
-
-margin-top:50px;
-
-}
-
-
-
-.review-card{
-
-background:white;
-
-padding:18px;
-
-border-radius:16px;
-
-box-shadow:
-0 5px 15px rgba(0,0,0,.08);
-
-}
-
-
-
-.review-header{
-
-display:flex;
-
-align-items:center;
-
-}
-
-
-
-.review-avatar{
-
-height:40px;
-
-width:40px;
-
-border-radius:50%;
-
-background:var(--primary);
-
-color:white;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-weight:700;
-
-}
-
-
-
-.review-user{
-
-display:flex;
-
-gap:12px;
-
-align-items:center;
-
-}
-
-
-
-.review-rating{
-
-margin-top:5px;
-
-}
-
-
-
-.reply-thread{
-
-margin-left:25px;
-
-border-left:2px solid #eee;
-
-padding-left:15px;
-
-}
-
-
-
-
-
-/* =====================================
- MAP
-===================================== */
-
-
-.map-section{
-
-margin-top:50px;
-
-}
-
-
-
-#map{
-
-height:400px;
-
-border-radius:20px;
-
-overflow:hidden;
-
-box-shadow:
-
-0 8px 25px rgba(0,0,0,.1);
-
-}
-
-
-
-
-
-/* =====================================
- SIMILAR LISTINGS
-===================================== */
-
-
-.similar-section{
-
-margin-top:50px;
-
-}
-
-
-
-
-/* =====================================
- FORMS
-===================================== */
-
-
-form{
-
-background:white;
-
-border-radius:18px;
-
+/* ================================================================
+   REVERIE — Complete Production Stylesheet
+   Covers: Navbar · Filters · Tax Toggle · Index Cards ·
+           Show Page · Reviews · Map · Footer · Full Responsive
+   ================================================================ */
+
+/* ── 0. TOKENS ───────────────────────────────────────────────── */
+:root {
+  --brand:        #ff385c;
+  --brand-hover:  #e0304f;
+  --brand-light:  #fff1f3;
+  --dark:         #222222;
+  --mid:          #717171;
+  --soft:         #b0b0b0;
+  --border:       #e8e8e8;
+  --surface:      #ffffff;
+  --bg:           #f8f8f8;
+  --radius-xs:    8px;
+  --radius-sm:    12px;
+  --radius-md:    18px;
+  --radius-lg:    24px;
+  --radius-xl:    32px;
+  --shadow-xs:    0 1px 4px  rgba(0,0,0,.06);
+  --shadow-sm:    0 2px 10px rgba(0,0,0,.07);
+  --shadow-md:    0 6px 22px rgba(0,0,0,.10);
+  --shadow-lg:    0 14px 40px rgba(0,0,0,.13);
+  --nav-h:        70px;
+  --ease:         .22s ease;
+  --font:         "Plus Jakarta Sans", sans-serif;
+}
+
+/* ── 1. BASE ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  color: var(--dark);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+main  { flex: 1; }
+a     { color: inherit; text-decoration: none; }
+img   { display: block; max-width: 100%; }
+
+/* ── 2. NAVBAR ───────────────────────────────────────────────── */
+.navbar {
+  height: var(--nav-h);
+  background: var(--surface) !important;
+  border-bottom: 1.5px solid var(--border) !important;
+  padding: 0 2.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 1px 6px rgba(0,0,0,.05);
+}
+
+/* Brand logo */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: -.5px;
+  color: var(--dark) !important;
+}
+.fa-house-flag {
+  color: var(--brand);
+  font-size: 1.75rem;
+}
+
+/* Nav links */
+.navbar-nav { align-items: center; gap: .15rem; }
+.nav-link {
+  color: var(--dark) !important;
+  font-weight: 600;
+  font-size: .9rem;
+  padding: .4rem .75rem !important;
+  border-radius: var(--radius-xs);
+  transition: color var(--ease), background var(--ease);
+  white-space: nowrap;
+}
+.nav-link:hover { color: var(--brand) !important; background: var(--brand-light); }
+
+/* Toggler */
+.navbar-toggler { border: 1.5px solid var(--border); border-radius: var(--radius-xs); }
+.navbar-toggler:focus { box-shadow: none; }
+
+/* ── 3. SEARCH BAR ───────────────────────────────────────────── */
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 360px;
+  height: 46px;
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
+  padding: .2rem .35rem .2rem 1.1rem;
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+  transition: border-color var(--ease), box-shadow var(--ease);
+  overflow: hidden;
+}
+.search-bar:focus-within {
+  border-color: #bbb;
+  box-shadow: var(--shadow-sm);
+}
+.search-input {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent;
+  flex: 1;
+  font-size: .88rem;
+  font-family: var(--font);
+  color: var(--dark);
+  min-width: 0;
+}
+.divider {
+  width: 1px;
+  height: 22px;
+  background: var(--border);
+  margin: 0 .5rem;
+  flex-shrink: 0;
+}
+.btn-search {
+  border: none;
+  background: var(--brand);
+  color: #fff;
+  border-radius: 50px;
+  padding: .5rem 1.1rem;
+  font-size: .88rem;
+  font-weight: 700;
+  font-family: var(--font);
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  transition: background var(--ease);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.btn-search:hover { background: var(--brand-hover); }
+
+/* ── 4. FILTER / CATEGORY BAR ───────────────────────────────── */
+#filters {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: .6rem 0 0;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  border-bottom: 1.5px solid var(--border);
+}
+#filters::-webkit-scrollbar { display: none; }
+#filters a { text-decoration: none; flex-shrink: 0; }
+
+/* Each category pill */
+.filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .25rem;
+  padding: .55rem 1.1rem .7rem;
+  color: var(--mid);
+  border-bottom: 2.5px solid transparent;
+  transition: color var(--ease), border-color var(--ease);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.filter i  { font-size: 1.3rem; }
+.filter p  { font-size: .73rem; font-weight: 600; margin: 0; }
+.filter:hover { color: var(--dark); }
+
+.filter.active {
+  color: var(--dark);
+  border-bottom: 2.5px solid var(--dark);
+}
+
+/* ── 5. TAX TOGGLE ───────────────────────────────────────────── */
+.tax-toggle {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: .45rem 1rem .7rem;
+  gap: .5rem;
+  white-space: nowrap;
+}
+.tax-toggle .form-check-label {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--dark);
+  cursor: pointer;
+  line-height: 1.2;
+}
+/* Bootstrap switch — brand colour when on */
+.tax-toggle .form-check-input:checked {
+  background-color: var(--brand) !important;
+  border-color: var(--brand) !important;
+}
+.tax-toggle .form-check-input:focus {
+  box-shadow: 0 0 0 3px rgba(255,56,92,.15) !important;
+}
+
+/* Hidden tax info badge on cards */
+.tax-info {
+  display: none;
+  color: var(--mid);
+  font-style: normal;
+  font-size: .78rem;
+  font-weight: 500;
+}
+
+/* ── 6. INDEX — LISTING CARDS ───────────────────────────────── */
+#listing-container { gap: 0; }
+
+.listing-link { text-decoration: none; display: block; }
+
+.listing-card {
+  border: none !important;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none !important;
+  margin-bottom: 2rem;
+  transition: transform var(--ease);
+}
+.listing-card:hover { transform: translateY(-4px); }
+.listing-card:hover .card-img-top { box-shadow: var(--shadow-md); }
+
+.card-img-top {
+  height: 250px;
+  object-fit: cover;
+  width: 100%;
+  border-radius: var(--radius-lg) !important;
+  transition: box-shadow var(--ease);
+  display: block;
+}
+
+.card-body { padding: .75rem 0 0 !important; background: transparent; }
+.card-body b { font-size: .95rem; font-weight: 700; color: var(--dark); }
+.card-text {
+  font-size: .87rem;
+  color: var(--mid);
+  line-height: 1.55;
+  margin: .15rem 0 0;
+}
+.card-img-overlay { display: none; }
+
+/* Empty state */
+.empty-state {
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  margin-top: 2rem;
+  padding: 2.5rem;
+}
+
+/* ── 7. GLOBAL BUTTON UTILITIES ─────────────────────────────── */
+.add-btn, .btn.add-btn {
+  background: var(--brand) !important;
+  border-color: var(--brand) !important;
+  color: #fff !important;
+  font-weight: 700;
+  border-radius: var(--radius-xs);
+  font-family: var(--font);
+}
+.add-btn:hover, .btn.add-btn:hover {
+  background: var(--brand-hover) !important;
+  border-color: var(--brand-hover) !important;
+}
+
+/* ── 8. SHOW PAGE — CONTAINER & HEADER ─────────────────────── */
+.show-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.show-header { margin-bottom: 1.25rem; }
+
+.listing-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -.5px;
+  line-height: 1.15;
+  margin-bottom: .35rem;
+}
+.listing-location { color: var(--mid); font-size: .92rem; }
+
+/* ── 9. SHOW PAGE — GALLERY ─────────────────────────────────── */
+.listing-gallery {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 2.25rem;
+  box-shadow: var(--shadow-sm);
+}
+.carousel { border-radius: var(--radius-lg); overflow: hidden; }
+
+.show-img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Carousel buttons */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: rgba(255,255,255,.88) !important;
+  box-shadow: var(--shadow-xs);
+  opacity: 1 !important;
+}
+.carousel-control-prev { left: 10px; margin: 0; }
+.carousel-control-next { right: 10px; margin: 0; }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1) brightness(0);
+  width: 16px;
+  height: 16px;
+}
+
+/* ── 10. SHOW PAGE — TWO-COLUMN LAYOUT ─────────────────────── */
+.show-layout {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* ── 11. SHOW PAGE — LEFT COLUMN ────────────────────────────── */
+.show-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+/* Host line */
+.host {
+  font-size: .92rem;
+  color: var(--mid);
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-xs);
+  margin: 0;
+}
+.host span { font-weight: 700; color: var(--dark); }
+
+/* Description */
+.description {
+  font-size: .93rem;
+  color: #555;
+  line-height: 1.8;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-xs);
+  margin: 0;
+}
+
+/* Price */
+.price {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--brand);
+  margin: 0;
+}
+
+/* Meta chips */
+.meta { display: flex; gap: .6rem; flex-wrap: wrap; margin: 0; }
+.meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  background: var(--brand-light);
+  color: var(--brand-hover);
+  font-weight: 700;
+  font-size: .78rem;
+  padding: .38rem .85rem;
+  border-radius: 50px;
+  border: 1px solid rgba(255,56,92,.15);
+}
+
+/* EDIT / DELETE action bar */
+.action-bar {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.action-bar form { margin: 0; }
+
+.btn-primary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand);
+  color: #fff !important;
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  padding: .6rem 1.4rem;
+  border-radius: var(--radius-xs);
+  border: none;
+  cursor: pointer;
+  transition: background var(--ease), transform var(--ease);
+  text-decoration: none;
+}
+.btn-primary-action:hover { background: var(--brand-hover); transform: translateY(-1px); }
+
+.btn-danger-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dark);
+  color: #fff;
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  padding: .6rem 1.4rem;
+  border-radius: var(--radius-xs);
+  border: none;
+  cursor: pointer;
+  transition: background var(--ease), transform var(--ease);
+}
+.btn-danger-action:hover { background: #111; transform: translateY(-1px); }
+
+/* ── 12. SHOW PAGE — RIGHT BOOKING CARD ─────────────────────── */
+.trip-card {
+  position: sticky;
+  top: calc(var(--nav-h) + 1.25rem);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem 1.75rem;
+  box-shadow: var(--shadow-lg);
+}
+.trip-card h5 {
+  font-weight: 800;
+  font-size: 1.2rem;
+  margin-bottom: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  color: var(--dark);
+}
+.trip-card h5 i { color: var(--brand); }
+.trip-card .form-label {
+  font-weight: 600;
+  font-size: .82rem;
+  color: var(--mid);
+  margin-bottom: .35rem;
+}
+.trip-card .form-control {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xs);
+  font-family: var(--font);
+  font-size: .92rem;
+  padding: .55rem .9rem;
+  transition: border-color var(--ease), box-shadow var(--ease);
+}
+.trip-card .form-control:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(255,56,92,.12);
+  outline: none;
+}
+
+.cost-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .55rem 0;
+  font-size: .9rem;
+  color: var(--mid);
+  border-bottom: 1px solid var(--bg);
+}
+.cost-row strong { color: var(--dark); font-weight: 700; }
+.cost-row:last-of-type { border-bottom: none; }
+
+.trip-card hr {
+  border-color: var(--border);
+  margin: .35rem 0;
+}
+
+.total-row {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--dark) !important;
+  border-bottom: none !important;
+}
+.total-row strong { font-size: 1.05rem; color: var(--brand) !important; }
+
+/* ── 13. REVIEWS SECTION ────────────────────────────────────── */
+.reviews-section { margin-top: 2.5rem; padding: 0; }
+.reviews-section > hr { margin-bottom: 1.75rem; border-color: var(--border); }
+
+/* Leave-a-review form card */
+.reviews-section h4 {
+  font-weight: 800;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+.reviews-section .needs-validation {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.6rem;
+  box-shadow: var(--shadow-xs);
+  margin-bottom: 2rem;
+}
+.reviews-section .needs-validation .form-control {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xs);
+  font-family: var(--font);
+  font-size: .9rem;
+  resize: vertical;
+}
+.reviews-section .needs-validation .form-control:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(255,56,92,.1);
+}
+.reviews-section .needs-validation .form-label {
+  font-weight: 600;
+  font-size: .85rem;
+  color: var(--mid);
+}
+
+/* Review heading */
+.reviews-section h5 {
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-bottom: 1.1rem;
+  letter-spacing: .3px;
+}
+
+/* Individual review card */
+.review-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.15rem 1.3rem;
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--ease), box-shadow var(--ease);
+  margin-bottom: .25rem;
+}
+.review-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Review header row */
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: .6rem;
+}
+.review-user { display: flex; align-items: center; gap: .7rem; }
+
+/* Avatar circle */
+.review-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: .95rem;
+  flex-shrink: 0;
+}
+.review-user-info { display: flex; flex-direction: column; line-height: 1.3; }
+.review-username { font-weight: 700; font-size: .9rem; color: var(--dark); margin: 0; }
+
+/* Star rating — fixed overlap */
+.review-rating {
+  display: block;        /* forces it onto its own line */
+  line-height: 1;
+  margin-top: 3px;
+  margin-bottom: 0;
+  transform: scale(.8);
+  transform-origin: left center;
+  /* The starability widget is ~32px tall at scale(1).
+     At scale(.8) it still occupies full layout height,
+     so we pull the dead space back in: */
+  height: 26px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* Starability injects a <p> wrapper — neutralise its margin */
+.review-rating p,
+.starability-result p {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+/* The info column must be flex-column so stars never wrap beside username */
+.review-user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  line-height: 1.3;
+}
+
+/* Username sits above stars, never beside them */
+.review-username {
+  display: block;
+  font-weight: 700;
+  font-size: .9rem;
+  color: var(--dark);
+  margin: 0 0 1px;
+  line-height: 1.3;
+}
+
+/* Review text */
+.reply-text {
+  font-size: .9rem;
+  color: #444;
+  line-height: 1.75;
+  margin: .4rem 0 .7rem;
+}
+.reply-mention { color: #0d6efd; font-weight: 700; margin-right: 2px; }
+
+/* Review action buttons */
+.review-card .btn {
+  font-size: .78rem;
+  font-weight: 700;
+  border-radius: var(--radius-xs);
+  padding: .3rem .8rem;
+}
+.review-card .btn-outline-dark { border-width: 1.5px; }
+.review-card .btn-outline-dark:hover {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+.review-card .btn-danger {
+  font-size: .78rem;
+  padding: .3rem .8rem;
+  border-radius: var(--radius-xs);
+}
+
+/* Reply thread indent */
+.reply-thread {
+  margin-top: .9rem;
+  margin-left: 2.2rem;
+  padding-left: 1.1rem;
+  border-left: 2.5px solid var(--border);
+}
+.reply-thread textarea,
+.collapse textarea {
+  border-radius: var(--radius-xs);
+  border: 1.5px solid var(--border);
+  font-family: var(--font);
+  font-size: .88rem;
+  resize: vertical;
+}
+.reply-thread textarea:focus,
+.collapse textarea:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(255,56,92,.1);
+  outline: none;
+}
+
+/* ── 14. MAP ─────────────────────────────────────────────────── */
+.map-section { margin-top: 2.5rem; }
+.map-section h3 {
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: .2px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+#map {
+  width: 100%;
+  height: 420px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  border: 1.5px solid var(--border);
+}
+
+/* ── 15. SIMILAR LISTINGS ───────────────────────────────────── */
+.similar-section { margin-top: 3.5rem; }
+.similar-section h3 {
+  font-weight: 800;
+  font-size: 1.3rem;
+  margin-bottom: 1.4rem;
+  letter-spacing: -.2px;
+}
+.similar-section .listing-card { transition: transform var(--ease), box-shadow var(--ease); }
+.similar-section .listing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ── 16. FLASH ALERTS ───────────────────────────────────────── */
+.alert {
+  border-radius: var(--radius-sm);
+  border: none;
+  font-weight: 600;
+  font-size: .9rem;
+}
+
+/* ── 17. FOOTER ─────────────────────────────────────────────── */
+.f-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  padding: 1.4rem 1rem;
+  background: #efefef;
+  border-top: 1.5px solid var(--border);
+  min-height: 5.5rem;
+}
+
+.f-info-smedia {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.f-info-smedia i {
+  font-size: 1.25rem;
+  color: var(--mid);
+  cursor: pointer;
+  transition: color var(--ease), transform var(--ease);
+}
+.f-info-smedia i:hover { color: var(--brand); transform: scale(1.15); }
+
+.f-info-brand {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--mid);
+  text-align: center;
+}
+
+.f-info-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.f-info-links a {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color var(--ease);
+}
+.f-info-links a:hover { color: var(--dark); text-decoration: underline; }
+
+/* ── 18. RESPONSIVE ─────────────────────────────────────────── */
+
+/* Tablet ≤ 992px */
+@media (max-width: 992px) {
+
+  .navbar { padding: 0 1.5rem; }
+
+  .search-bar { width: 280px; }
+
+  /* Show page: stack to single column */
+  .show-layout {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  .trip-card {
+    position: relative;
+    top: 0;
+  }
+  .show-img { height: 420px; }
+
+  /* Filter bar: scroll horizontally */
+  #filters {
+    padding-bottom: 0;
+    gap: 0;
+  }
+  .filter { padding: .5rem .9rem .65rem; }
+  .tax-toggle { padding: .5rem .75rem .65rem; }
+}
+
+/* Mobile-L ≤ 768px */
+@media (max-width: 768px) {
+
+  .navbar { padding: 0 1rem; }
+
+  /* Search full-width inside collapsed nav */
+  .search-bar {
+    width: 100%;
+    margin: .6rem 0;
+  }
+
+  /* Nav stacks vertically when toggled */
+  .navbar-nav { width: 100%; margin-top: .25rem; }
+  .nav-link { width: 100%; }
+
+  .show-img { height: 300px; }
+  .listing-title { font-size: 1.6rem; }
+
+  .card-img-top { height: 220px; }
+
+  #map { height: 300px; }
+
+  .reply-thread { margin-left: 1rem; padding-left: .75rem; }
+  .review-avatar { width: 34px; height: 34px; font-size: .85rem; }
+
+  .action-bar { gap: .5rem; }
+
+  /* Tax toggle: tuck under filters on small screens */
+  .tax-toggle {
+    margin-left: 0;
+    width: 100%;
+    border-top: 1px solid var(--border);
+    padding: .6rem 1rem;
+    justify-content: flex-start;
+  }
+  #filters {
+    flex-wrap: wrap;
+  }
+}
+
+/* Mobile-S ≤ 576px */
+@media (max-width: 576px) {
+
+  .show-container { padding: 1.25rem 1rem 3rem; }
+  .listing-title { font-size: 1.4rem; }
+
+  .show-img { height: 240px; }
+  .card-img-top { height: 200px; }
+
+  .trip-card { padding: 1.2rem 1.1rem; }
+
+  .review-card { padding: .9rem 1rem; }
+  .reviews-section .needs-validation { padding: 1rem 1.1rem; }
+
+  #map { height: 250px; border-radius: var(--radius-md); }
+
+  .carousel-control-prev,
+  .carousel-control-next { width: 34px; height: 34px; }
+
+  .price { font-size: 1.4rem; }
+
+  .f-info { min-height: auto; padding: 1.1rem 1rem; }
 }
-
-
-
-.form-control,
-.form-select{
-
-border-radius:12px!important;
-
-padding:12px;
-
-}
-
-
-
-/* =====================================
- FOOTER
-===================================== */
-
-
-footer{
-
-background:white;
-
-border-top:1px solid #eee;
-
-margin-top:60px;
-
-}
-
-
-
-.f-info{
-
-max-width:1200px;
-
-margin:auto;
-
-padding:25px;
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-flex-wrap:wrap;
-
-}
-
-
-
-.f-info-smedia i{
-
-font-size:22px;
-
-margin-right:15px;
-
-color:#333;
-
-}
-
-
-
-.f-info-smedia i:hover{
-
-color:var(--primary);
-
-}
-
-
-
-.f-info-links a{
-
-color:#555;
-
-}
-
-
-
-.f-info-links a:hover{
-
-color:var(--primary);
-
-}
-
-
-
-
-
-/* =====================================
- RESPONSIVE
-===================================== */
-
-
-@media(max-width:992px){
-
-
-.search-bar{
-
-width:100%;
-
-margin:15px 0;
-
-}
-
-
-
-.show-layout{
-
-grid-template-columns:1fr;
-
-}
-
-
-
-.trip-card{
-
-position:relative;
-
-top:0;
-
-}
-
-
-
-}
-
-
-@media(max-width:768px){
-
-
-.navbar{
-
-padding:10px;
-
-}
-
-
-
-.show-img{
-
-height:300px;
-
-}
-
-
-
-.listing-title{
-
-font-size:26px;
-
-}
-
-
-
-.f-info{
-
-flex-direction:column;
-
-text-align:center;
-
-}
-
-
-
-#filters{
-
-gap:18px;
-
-}
-
-
-
-.action-bar{
-
-display:flex;
-
-flex-direction:column;
-
-}
-
-
-
-}
-

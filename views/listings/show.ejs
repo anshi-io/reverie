@@ -192,193 +192,63 @@ data-bs-slide="next">
 </div>
 
 
+<%# ── after .listing-gallery closes ── %>
 
 <div class="show-layout">
 
+  <%# ── LEFT COLUMN ── %>
+  <div class="show-content">
 
-<div class="show-content">
+    <p class="host">
+      Curated by <span>@<%= listing.owner.username %></span>
+    </p>
 
-<p class="host">
-Curated by 
-<span>@<%= listing.owner.username %></span>
-</p>
+    <p class="description"><%= listing.description %></p>
 
+    <p class="price">₹<%= listing.price.toLocaleString("en-IN") %></p>
 
-<p class="description">
-<%= listing.description %>
-</p>
-
-
-<p class="price">
-₹<%= listing.price.toLocaleString("en-IN") %>
-</p>
-
-
-<div class="meta">
-
-<span>
-<i class="fa-solid fa-location-dot"></i>
-<%= listing.location %>
-</span>
-
-
-<span>
-<i class="fa-solid fa-globe"></i>
-<%= listing.country %>
-</span>
-
-
-</div>
-
-<!-- 
-        %= listing.price.toLocaleString("en-IN") %>
-    </p> -->
-    <!-- <div class="trip-card mt-4">
-
-<h5>Stay Planner</h5>
-
-<div class="mb-3">
-
-<label class="form-label">
-
-Number of Nights
-
-</label>
-
-<input
-type="number"
-id="nights"
-class="form-control"
-min="1"
-value="1"
->
-
-</div>
-
-<div class="cost-row">
-
-<span>Subtotal</span>
-
-<strong id="subtotal">
-
-₹<%= listing.price.toLocaleString("en-IN") %>
-
-</strong>
-
-</div>
-
-<div class="cost-row">
-
-<span>Taxes (18%)</span>
-
-<strong id="taxes">
-
-₹<%= Math.round(listing.price*0.18).toLocaleString("en-IN") %>
-
-</strong>
-
-</div>
-
-<hr>
-
-<div class="cost-row total-row">
-
-<span>Total</span>
-
-<strong id="total">
-
-₹<%= Math.round(listing.price*1.18).toLocaleString("en-IN") %>
-
-</strong>
-
-</div>
-
-</div> -->
-    <!-- <div class="meta">
-        <span><%= listing.location %></span>
-        <span><%= listing.country %></span>
+    <div class="meta">
+      <span><i class="fa-solid fa-location-dot"></i> <%= listing.location %></span>
+      <span><i class="fa-solid fa-globe"></i> <%= listing.country %></span>
     </div>
-</div>
-</div> -->
 
-
-<div class="trip-card">
-
-
-<h5>
-<i class="fa-solid fa-calendar-days"></i>
-Stay Planner
-</h5>
-
-
-<div class="mb-3">
-
-<label class="form-label">
-Number of Nights
-</label>
-
-
-<input
-type="number"
-id="nights"
-class="form-control"
-min="1"
-value="1">
-
-</div>
-
-
-<div class="cost-row">
-
-<span>Subtotal</span>
-
-<strong id="subtotal">
-₹<%= listing.price.toLocaleString("en-IN") %>
-</strong>
-
-</div>
-
-
-
-<div class="cost-row">
-
-<span>Taxes (18%)</span>
-
-<strong id="taxes">
-₹<%= Math.round(listing.price*0.18).toLocaleString("en-IN") %>
-</strong>
-
-</div>
-
-
-<hr>
-
-
-<div class="cost-row total-row">
-
-<span>Total</span>
-
-<strong id="total">
-₹<%= Math.round(listing.price*1.18).toLocaleString("en-IN") %>
-</strong>
-
-</div>
-
-
-</div>
- <%if(currUser && currUser._id.equals(listing.owner._id)){%> 
-    <!-- <div class="btns d-flex  mt-3"> -->
+    <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
     <div class="action-bar">
-    <a href="/listings/<%= listing._id%>/edit" class="btn-primary-action  me-2 edit-btn">EDIT</a>
-    
-    <form method="POST" action="/listings/<%= listing._id%>?_method=DELETE " class="m-0">
-    <button class="btn-danger-action delete-btn">DELETE</button>
-    
-    </form>
-</div>
-<%}%> 
+      <a href="/listings/<%= listing._id %>/edit" class="btn-primary-action">EDIT</a>
+      <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+        <button class="btn-danger-action">DELETE</button>
+      </form>
+    </div>
+    <% } %>
 
-</div>
+  </div><%# ── end left col ── %>
+
+  <%# ── RIGHT COLUMN ── %>
+  <div class="trip-card">
+    <h5><i class="fa-solid fa-calendar-days"></i> Stay Planner</h5>
+
+    <div class="mb-3">
+      <label class="form-label">Number of Nights</label>
+      <input type="number" id="nights" class="form-control" min="1" value="1">
+    </div>
+
+    <div class="cost-row">
+      <span>Subtotal</span>
+      <strong id="subtotal">₹<%= listing.price.toLocaleString("en-IN") %></strong>
+    </div>
+    <div class="cost-row">
+      <span>Taxes (18%)</span>
+      <strong id="taxes">₹<%= Math.round(listing.price*0.18).toLocaleString("en-IN") %></strong>
+    </div>
+    <hr>
+    <div class="cost-row total-row">
+      <span>Total</span>
+      <strong id="total">₹<%= Math.round(listing.price*1.18).toLocaleString("en-IN") %></strong>
+    </div>
+  </div><%# ── end right col ── %>
+
+</div><%# ── end .show-layout ── %>
+
 <br>
 
 </div>
