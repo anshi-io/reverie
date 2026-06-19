@@ -30,9 +30,9 @@ module.exports.renderLogin=(req,res)=>{
 };
 
 module.exports.login=async (req, res) => {
-
-        req.flash("success", "Welcome back!");
         let redirectUrl = res.locals.redirectUrl || "/listings";
+        req.flash("success", "Welcome back!");
+        delete req.session.redirectUrl;
         res.redirect(redirectUrl);
 };
 
