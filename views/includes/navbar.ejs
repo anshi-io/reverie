@@ -151,41 +151,48 @@
 
 }
 </style> -->
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-  <div class="container-fluid">
-    <!-- <a class="navbar-brand" href="/"><i class="fa-solid fa-house-flag"></i></a> -->
-    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-house-flag"></i></a>
+<nav class="navbar navbar-expand-md sticky-top">
+  <div class="container-fluid navbar-inner">
 
-    <button 
-       class="navbar-toggler" 
-       type="button" 
-       data-bs-toggle="collapse" 
-       data-bs-target="#navbarNavAltMarkup" 
-       aria-controls="navbarNavAltMarkup" >
+    <!-- Brand — always visible -->
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-solid fa-house-flag"></i> Reverie
+    </a>
+
+    <!-- Search bar — OUTSIDE collapse, always visible -->
+    <form class="search-bar ms-auto me-2" role="search" action="/listings" method="GET">
+      <input class="search-input" type="search" name="search"
+        placeholder="Search destination"
+        value="<%= typeof search !== 'undefined' ? search : '' %>">
+      <div class="divider"></div>
+      <button class="btn-search" type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span class="search-label">Search</span>
+      </button>
+    </form>
+
+    <!-- Hamburger — always visible -->
+    <button class="navbar-toggler" type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
-    
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> 
-     
-      <form class="d-flex search-bar ms-auto" role="search" action="/listings" method="GET">
-      <input class="form-control me-2 search-input" type="search" name="search" placeholder="Search destination" value="<%= typeof search !== 'undefined' ? search : '' %>">
-      <div class="divider"></div>
-      <button class="btn btn-search" type="submit">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        Search</button>
-      </form>
-      
-        <div class="navbar-nav ms-auto">
-          <a class="nav-link" href="/listings">Explore</a>
-          <a class="nav-link" href="/listings/new">Host a Reverie</a>
+
+    <!-- Collapse — ONLY nav links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings">Explore</a>
+        <a class="nav-link" href="/listings/new">Host a Reverie</a>
         <% if(!currUser) { %>
-            <b><a class="nav-link"  href="/signup">Sign Up</a></b>
-            <b><a class="nav-link" href="/login">Login</a></b>
-        <%}%>
+          <a class="nav-link" href="/signup"><b>Sign Up</b></a>
+          <a class="nav-link" href="/login"><b>Login</b></a>
+        <% } %>
         <% if(currUser) { %>
-        <b><a class="nav-link" href="/logout">Log Out</a></b>
-        <%}%> 
+          <a class="nav-link" href="/logout"><b>Log Out</b></a>
+        <% } %>
       </div>
     </div>
+
   </div>
 </nav>
