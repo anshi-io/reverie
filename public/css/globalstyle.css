@@ -1,0 +1,375 @@
+/* =========================
+   GLOBAL RESET + SYSTEM
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+  background: #f7f7f7;
+  color: #222;
+}
+
+/* =========================
+   GLOBAL LINKS
+========================= */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =========================
+   BUTTON SYSTEM (FIX ALL BUTTON ISSUES)
+========================= */
+.btn,
+button {
+  border-radius: 10px !important;
+  transition: 0.2s ease;
+  font-weight: 600;
+}
+
+.btn-dark {
+  background: #222 !important;
+  border: none !important;
+}
+
+.btn-dark:hover {
+  background: #000 !important;
+  transform: translateY(-2px);
+}
+
+.btn-outline-dark:hover {
+  background: #222 !important;
+  color: #fff !important;
+}
+
+/* EDIT / DELETE FIX */
+.edit-btn,
+.btn-primary-action {
+  background: #ff385c !important;
+  color: white !important;
+  padding: 10px 16px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.edit-btn:hover {
+  background: #e31c5f !important;
+  transform: translateY(-2px);
+}
+
+.delete-btn,
+.btn-danger-action {
+  background: #222 !important;
+  color: white !important;
+  border: none !important;
+  padding: 10px 16px;
+  border-radius: 10px;
+}
+
+.delete-btn:hover {
+  background: #000 !important;
+}
+
+/* =========================
+   NAVBAR FIX (SEARCH + TOGGLER)
+========================= */
+
+.navbar {
+  background: white !important;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.navbar-toggler {
+  border: none !important;
+  outline: none !important;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none !important;
+}
+
+.navbar-toggler-icon {
+  filter: invert(0.3);
+}
+
+/* SEARCH BAR */
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 380px;
+  height: 45px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background: #fff;
+  padding: 0 10px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+}
+
+.search-bar:hover {
+  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+}
+
+.btn-search {
+  background: #ff385c !important;
+  border: none !important;
+  color: white !important;
+  border-radius: 999px;
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* =========================
+   FILTER BAR (INDEX PAGE)
+========================= */
+
+#filters {
+  display: flex;
+  gap: 18px;
+  padding: 15px 10px;
+  overflow-x: auto;
+  background: white;
+  border-bottom: 1px solid #eee;
+}
+
+.filter {
+  text-align: center;
+  opacity: 0.7;
+  font-size: 12px;
+  min-width: 70px;
+}
+
+.filter i {
+  font-size: 18px;
+}
+
+.filter.active {
+  opacity: 1;
+  font-weight: 600;
+  border-bottom: 2px solid #222;
+}
+
+/* =========================
+   LISTING CARDS (INDEX)
+========================= */
+
+.listing-card {
+  border: none !important;
+  border-radius: 16px !important;
+  overflow: hidden;
+  transition: 0.2s;
+  background: white;
+}
+
+.listing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.card-img-top {
+  object-fit: cover;
+  height: 240px;
+}
+
+/* =========================
+   SHOW PAGE LAYOUT (FIX YOUR BIG ISSUE)
+========================= */
+
+.show-container {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 0 15px;
+}
+
+/* REMOVE SIDE SPLIT ISSUE */
+.show-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* IMAGE FIX (NO PARTITION, FULL WIDTH) */
+.listing-gallery {
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.show-img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+/* CONTENT CARD */
+.show-content {
+  background: white;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* TITLE */
+.listing-title {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.listing-location {
+  color: #717171;
+}
+
+/* PRICE BADGE */
+.price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ff385c;
+}
+
+/* =========================
+   ACTION BAR
+========================= */
+
+.action-bar {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* =========================
+   REVIEW CARD FIX (IMPORTANT)
+========================= */
+
+.review-card {
+  background: white;
+  border-radius: 14px;
+  padding: 15px;
+  margin-bottom: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.review-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* avatar */
+.review-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #ff385c;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+/* ⭐ FIX RATING ALWAYS INSIDE BOX */
+.starability-result {
+  margin-top: 5px;
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* reply text NEVER overflows */
+.reply-text {
+  margin-top: 8px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* reply thread indentation */
+.reply-thread {
+  margin-left: 20px;
+  border-left: 2px solid #eee;
+  padding-left: 10px;
+}
+
+/* =========================
+   FOOTER (FIX YOUR FOOTER)
+========================= */
+
+footer {
+  background: white;
+  border-top: 1px solid #eee;
+  margin-top: 50px;
+}
+
+.f-info {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.f-info i {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+/* =========================
+   FORMS (NEW / EDIT PAGES)
+========================= */
+
+.form-control,
+.form-select {
+  border-radius: 10px !important;
+}
+
+form {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+/* =========================
+   RESPONSIVE FIXES
+========================= */
+
+@media (max-width: 768px) {
+
+  .search-bar {
+    width: 100%;
+  }
+
+  .show-img {
+    height: 300px;
+  }
+
+  .action-bar {
+    flex-direction: column;
+  }
+
+  .review-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #filters {
+    gap: 10px;
+  }
+}
