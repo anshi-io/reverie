@@ -355,6 +355,7 @@ img { display: block; max-width: 100%; }
 .card-img-top {
   height: 250px;
   object-fit: cover;
+  object-position: center top; /* show top of image — faces/subjects usually here */
   width: 100%;
   border-radius: var(--radius-lg) !important;
   transition: box-shadow var(--ease);
@@ -634,10 +635,53 @@ img { display: block; max-width: 100%; }
   box-shadow: var(--shadow-sm); border: 1.5px solid var(--border);
 }
 
-/* Similar listings */
+/* Similar listings — one row, horizontally scrollable on all screens */
 .similar-section { margin-top: 2.5rem; padding-bottom: 3rem; }
 .similar-section h3 { font-weight: 800; font-size: 1.2rem; margin-bottom: 1.3rem; }
+
+/* Override Bootstrap .row — always single flex row that scrolls */
+.similar-section .row {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 1.25rem !important;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding-bottom: .75rem;
+  margin: 0 !important;
+}
+.similar-section .row::-webkit-scrollbar { display: none; }
+
+/* Each card: 3 visible on desktop, peek at 4th */
+.similar-section .row > div {
+  flex: 0 0 calc(33.333% - .85rem) !important;
+  max-width: calc(33.333% - .85rem) !important;
+  padding: 0 !important;
+  width: auto !important;
+}
+
+.similar-section .listing-card {
+  margin-bottom: 0 !important;
+  transition: transform var(--ease), box-shadow var(--ease);
+}
 .similar-section .listing-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
+/* Image — object-fit: contain so nothing is cropped */
+.similar-section .card-img-top {
+  height: 210px !important;
+  object-fit: contain !important;
+  background: var(--bg);
+  border-radius: var(--radius-lg) !important;
+}
+
+/* Mobile: each card ~78vw so next one peeks in */
+@media (max-width: 767.98px) {
+  .similar-section .row > div {
+    flex: 0 0 78vw !important;
+    max-width: 78vw !important;
+  }
+  .similar-section .card-img-top { height: 175px !important; }
+}
 
 /* ── FLASH ───────────────────────────────────────────────────── */
 .alert { border-radius: var(--radius-sm); border: none; font-weight: 600; font-size: .9rem; }
