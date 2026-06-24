@@ -222,30 +222,174 @@ data-bs-slide="next">
     <% } %>
 
   </div><%# ── end left col ── %>
+  <% if(currUser){ %>
 
+
+<% if(isWishlisted){ %>
+
+
+<form
+
+action="/wishlist/<%= listing._id %>?_method=DELETE"
+
+method="POST"
+
+>
+
+
+<button 
+class="btn btn-outline-danger mb-3"
+>
+
+<i class="fa-solid fa-heart"></i>
+
+Remove from Wishlist
+
+</button>
+
+
+</form>
+
+
+<% }else{ %>
+
+
+
+<form
+
+action="/wishlist/<%= listing._id %>"
+
+method="POST"
+
+>
+
+
+<button
+
+class="btn btn-outline-danger mb-3"
+
+>
+
+<i class="fa-regular fa-heart"></i>
+
+</button>
+
+
+</form>
+
+
+<% } %>
+
+
+<% } %>
   <%# ── RIGHT COLUMN ── %>
   <div class="trip-card">
-    <h5><i class="fa-solid fa-calendar-days"></i> Stay Planner</h5>
 
-    <div class="mb-3">
-      <label class="form-label">Number of Nights</label>
-      <input type="number" id="nights" class="form-control" min="1" value="1" inputmode="numeric">
-    </div>
+<h5>
+<i class="fa-solid fa-calendar-days"></i>
+Stay Planner
+</h5>
 
-    <div class="cost-row">
-      <span>Subtotal</span>
-      <strong id="subtotal">₹<%= listing.price.toLocaleString("en-IN") %></strong>
-    </div>
-    <div class="cost-row">
-      <span>Taxes (18%)</span>
-      <strong id="taxes">₹<%= Math.round(listing.price*0.18).toLocaleString("en-IN") %></strong>
-    </div>
-    <hr>
-    <div class="cost-row total-row">
-      <span>Total</span>
-      <strong id="total">₹<%= Math.round(listing.price*1.18).toLocaleString("en-IN") %></strong>
-    </div>
-  </div><%# ── end right col ── %>
+
+<form 
+action="/bookings/check/<%= listing._id %>"
+method="POST"
+>
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Check In
+</label>
+
+<input 
+type="date"
+name="checkIn"
+id="checkIn"
+class="form-control"
+required
+>
+
+</div>
+
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Check Out
+</label>
+
+<input 
+type="date"
+name="checkOut"
+id="checkOut"
+class="form-control"
+required
+>
+
+</div>
+
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Guests
+</label>
+
+
+<input 
+type="number"
+name="guests"
+class="form-control"
+value="1"
+min="1"
+required
+>
+
+
+</div>
+
+
+
+<div class="cost-row">
+
+<span>
+Price
+</span>
+
+
+<strong>
+
+₹<%= listing.price.toLocaleString("en-IN") %>
+/ night
+
+</strong>
+
+</div>
+
+
+<hr>
+
+
+<button 
+class="btn-primary-action w-100"
+type="submit"
+>
+
+Reserve
+
+</button>
+
+
+</form>
+
+
+</div>
 
 </div><%# ── end .show-layout ── %>
 
@@ -385,53 +529,26 @@ alt="listing image"
 </main>
 <script>
 
-const nightlyPrice = <%= listing.price %>;
+const today =
+new Date()
+.toISOString()
+.split("T")[0];
 
-const nightsInput =
-document.getElementById("nights");
 
-const subtotal =
-document.getElementById("subtotal");
+document.getElementById("checkIn").min=today;
 
-const taxes =
-document.getElementById("taxes");
+document.getElementById("checkOut").min=today;
 
-const total =
-document.getElementById("total");
 
-if(nightsInput){
 
-nightsInput.addEventListener("input",()=>{
+document.getElementById("checkIn")
+.addEventListener("change",function(){
 
-let nights =
-parseInt(nightsInput.value);
+document.getElementById("checkOut").min=this.value;
 
-if(!nights || nights < 1){
-
-nights = 1;
-
-nightsInput.value = 1;
-
-}
-
-const sub = nightlyPrice * nights;
-
-const tax = Math.round(sub * 0.18);
-
-const finalTotal = sub + tax;
-
-subtotal.textContent =
-"₹" + sub.toLocaleString("en-IN");
-
-taxes.textContent =
-"₹" + tax.toLocaleString("en-IN");
-
-total.textContent =
-"₹" + finalTotal.toLocaleString("en-IN");
 
 });
 
-}
 
 </script>
 <script src="/js/map.js"></script>

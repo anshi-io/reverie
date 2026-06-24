@@ -22,6 +22,8 @@ const userRouter=require("./routes/user.js");
 const helmet=require("helmet");
 const rateLimit=require("express-rate-limit");
 const dbUrl=process.env.ATLASDB_URL;
+const bookingRouter=require("./routes/booking.js");
+const wishlistRouter=require("./routes/wishlist.js");
 
 main().then(()=>{
     console.log("Connected to DB");
@@ -56,7 +58,7 @@ const store = MongoStore.create({
     touchAfter: 24*3600,
 })
 
-store.on("error",()=>{
+store.on("error",(err)=>{
     console.log("ERROR IN MONGO SESSION STORE",err);
 })
 
@@ -67,12 +69,23 @@ const sessionOptions = {
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    // cookie: {
+    //     expires: Date.now()+7*24*60*60*1000,
+    //     maxAge:7*24*60*60*1000,
+    //     httpOnly:true,
+    //     secure:process.env.NODE_ENV==="production",
+    //     sameSite: "none"
+    // }
     cookie: {
-        expires: Date.now()+7*24*60*60*1000,
-        maxAge:7*24*60*60*1000,
-        httpOnly:true,
-        secure:process.env.NODE_ENV==="production",
-        sameSite: "none"
+    expires: Date.now()+7*24*60*60*1000,
+    maxAge:7*24*60*60*1000,
+    httpOnly:true,
+
+    secure: process.env.NODE_ENV === "production",
+
+    sameSite: process.env.NODE_ENV === "production"
+        ? "none"
+        : "lax"
     }
 };
 app.use(session(sessionOptions));
@@ -90,6 +103,8 @@ app.use((req,res,next)=>{
     res.locals.currUser=req.user;
     next();
 })
+app.use("/bookings",bookingRouter);
+app.use("/wishlist",wishlistRouter);
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
 app.use("/",userRouter);

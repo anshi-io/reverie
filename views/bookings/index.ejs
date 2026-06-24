@@ -1,0 +1,30 @@
+<% layout("/layouts/boilerplate") %>
+
+<h2 class="trips-heading">Your Trips ✈️</h2>
+
+<% if(bookings.length === 0){ %>
+  <div class="alert alert-info">You don't have any bookings yet.</div>
+<% } %>
+
+<div class="booking-grid">
+  <% bookings.forEach(booking => { %>
+  <div class="booking-card">
+    <img src="<%= booking.listing.images[0].url %>" alt="<%= booking.listing.title %>">
+    <div class="booking-card-body">
+      <h4><%= booking.listing.title %></h4>
+      <p class="booking-location">
+        <i class="fa-solid fa-location-dot"></i>
+        <%= booking.listing.location %>, <%= booking.listing.country %>
+      </p>
+      <hr class="booking-divider">
+      <div class="booking-meta">
+        <p><b>Check In:</b> <%= booking.checkIn.toDateString() %></p>
+        <p><b>Check Out:</b> <%= booking.checkOut.toDateString() %></p>
+        <p><b>Guests:</b> <%= booking.guests %></p>
+      </div>
+      <p class="booking-total">Total: <span>₹<%= booking.totalPrice.toLocaleString("en-IN") %></span></p>
+      <span class="booking-badge <%= booking.status %>"><%= booking.status %></span>
+    </div>
+  </div>
+  <% }) %>
+</div>

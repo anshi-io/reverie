@@ -1,0 +1,25 @@
+<% layout("/layouts/boilerplate") %>
+
+<h2 class="wishlist-heading">Your Wishlist ❤️</h2>
+
+<% if(wishlist.length === 0){ %>
+  <p style="color:var(--mid);margin-top:1rem;">No saved places yet. Start exploring!</p>
+<% } %>
+
+<div class="wishlist-grid">
+  <% wishlist.forEach(listing => { %>
+  <div class="wishlist-card">
+    <img src="<%= listing.images[0].url %>" alt="<%= listing.title %>">
+    <div class="wishlist-card-body">
+      <h5><%= listing.title %></h5>
+      <p class="wishlist-price">₹<%= listing.price.toLocaleString("en-IN") %> / night</p>
+      <div class="wishlist-actions">
+        <a href="/listings/<%= listing._id %>" class="btn-view">View</a>
+        <form action="/wishlist/<%= listing._id %>?_method=DELETE" method="POST" style="margin:0">
+          <button class="btn-remove">Remove</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <% }) %>
+</div>

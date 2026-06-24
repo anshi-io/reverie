@@ -94,6 +94,18 @@ module.exports.showListing=async(req,res)=>{
     ]}]}]}]}]}]}
     ).populate("categories")
     .populate("owner");
+    let isWishlisted = false;
+
+
+
+if(req.user){
+
+
+isWishlisted =
+req.user.wishlist.includes(listing._id);
+
+
+}
     if(!listing){
         req.flash("error","Listing you requested for does not exist!!");
         return res.redirect("/listings");
@@ -103,67 +115,67 @@ module.exports.showListing=async(req,res)=>{
     _id: { $ne: listing._id }
     })
     .limit(3);
-    res.render("listings/show.ejs",{listing,similarListings});
+    res.render("listings/show.ejs",{listing,similarListings,isWishlisted});
    
 };
 
 module.exports.createListing = async(req,res)=>{
-let response = await geocodingClient
-.forwardGeocode({
-query:req.body.listing.location,
-limit:1
-})
-.send();
+    let response = await geocodingClient
+    .forwardGeocode({
+    query:req.body.listing.location,
+    limit:1
+    })
+    .send();
 
-let newListing = new Listing(req.body.listing);
-newListing.owner=req.user._id;
-let images=[];
-let hashes=[];
+    let newListing = new Listing(req.body.listing);
+    newListing.owner=req.user._id;
+    let images=[];
+    let hashes=[];
 
-for(let file of req.files){
-const hash =
-crypto
-.createHash("md5")
-.update(file.buffer)
-.digest("hex");
+    for(let file of req.files){
+    const hash =
+    crypto
+    .createHash("md5")
+    .update(file.buffer)
+    .digest("hex");
 
-if(hashes.includes(hash)){
-req.flash(
-"error",
-"Same image selected multiple times"
-);
-return res.redirect("/listings/new");
+    if(hashes.includes(hash)){
+       req.flash(
+        "error",
+        "Same image selected multiple times"
+       );
+      return res.redirect("/listings/new");
 
-}
+    }
 
-let existing =
-await Listing.findOne({
-imageHashes:hash
-});
+    let existing =
+    await Listing.findOne({
+    imageHashes:hash
+    });
 
-if(existing){
-req.flash(
-"error",
-"Image already exists in another listing"
-);
-return res.redirect("/listings/new");
-}
+    if(existing){
+    req.flash(
+        "error",
+        "Image already exists in another listing"
+    );
+    return res.redirect("/listings/new");
+    }
 
-let result =
-await new Promise((resolve,reject)=>{
-let stream =
-cloudinary.uploader.upload_stream(
-{
-folder:"reverie_DEV"
-},
-(error,result)=>{
-if(error)
-reject(error);
+    let result =
+    await new Promise((resolve,reject)=>{
+    let stream =
+       cloudinary.uploader.upload_stream(
+         {
+          folder:"reverie_DEV"
+         },
+         (error,result)=>{
+           if(error) 
+           reject(error);
 
-else
-resolve(result);
-}
-);
+           else
+           resolve(result);
+         }
+        );
 stream.end(file.buffer);
 });
 images.push({
