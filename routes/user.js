@@ -3,8 +3,9 @@ const router = express.Router();
 const user= require("../models/user.js");
 const wrapAsync=require("../utils/wrapAsync.js");
 const passport = require("passport");
-const { saveRedirectUrl } = require("../middleware.js");
+const { saveRedirectUrl, isLoggedIn } = require("../middleware.js");
 const userController = require("../controllers/user.js");
+
 router.get("/", (req,res)=>{
     res.redirect("/listings");
 });
@@ -22,5 +23,11 @@ router.route("/login")
 );
 
 router.get("/logout",userController.renderlogout);
+
+router.post(
+"/become-host",
+isLoggedIn,
+wrapAsync(userController.becomeHost)
+);
 
 module.exports = router;

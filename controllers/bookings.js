@@ -282,3 +282,164 @@ module.exports.myBookings = async(req,res)=>{
 
 
 };
+
+module.exports.requestCancel = async(req,res)=>{
+
+
+const booking =
+await Booking.findById(req.params.id);
+
+
+if(!booking){
+
+req.flash(
+"error",
+"Booking not found"
+);
+
+return res.redirect("/bookings");
+
+}
+
+
+
+booking.status="cancel-requested";
+
+booking.hostResponse="pending";
+
+
+await booking.save();
+
+
+req.flash(
+"success",
+"Cancellation request sent to host"
+);
+
+
+
+res.redirect("/bookings");
+
+
+}
+
+module.exports.requestModify = async(req,res)=>{
+
+
+const booking =
+await Booking.findById(req.params.id)
+.populate("listing");
+
+
+
+const {
+checkIn,
+checkOut,
+guests,
+reason
+}=req.body;
+if(!reason){
+
+req.flash(
+"error",
+"Reason is required for modification request"
+);
+
+
+return res.redirect("/bookings");
+
+}
+
+
+const newStart =
+new Date(checkIn);
+
+
+const newEnd =
+new Date(checkOut);
+
+
+
+
+// checking date conflict
+
+const conflict =
+await Booking.findOne({
+
+listing:booking.listing._id,
+
+
+status:{
+$in:[
+"confirmed",
+"modified"
+]
+},
+
+
+
+checkIn:{
+$lt:newEnd
+},
+
+
+checkOut:{
+$gt:newStart
+}
+
+
+});
+
+
+
+if(conflict){
+
+
+req.flash(
+"error",
+"These dates are already booked"
+);
+
+
+return res.redirect("/bookings");
+
+
+}
+
+
+
+
+booking.status="modify-requested";
+
+
+booking.hostResponse="pending";
+
+
+booking.modificationRequest={
+
+newCheckIn:newStart,
+
+newCheckOut:newEnd,
+
+newGuests:guests,
+
+reason
+
+};
+
+
+
+await booking.save();
+
+
+
+req.flash(
+"success",
+"Modification request sent to host"
+);
+
+
+
+res.redirect("/bookings");
+
+}

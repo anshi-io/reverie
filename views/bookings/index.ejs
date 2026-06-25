@@ -24,6 +24,61 @@
       </div>
       <p class="booking-total">Total: <span>₹<%= booking.totalPrice.toLocaleString("en-IN") %></span></p>
       <span class="booking-badge <%= booking.status %>"><%= booking.status %></span>
+      <% if(booking.status==="confirmed"){ %>
+
+
+<form method="POST"
+action="/bookings/<%=booking._id%>/cancel">
+
+<button class="btn btn-danger">
+Request Cancellation
+</button>
+
+</form>
+
+
+
+<form method="POST"
+action="/bookings/<%=booking._id%>/modify">
+
+
+<input 
+type="date"
+name="checkIn"
+required>
+
+
+<input 
+type="date"
+name="checkOut"
+required>
+
+
+<input
+type="number"
+name="guests"
+value="<%=booking.guests%>"
+>
+
+
+<input
+type="text"
+name="reason"
+required
+placeholder="Tell host why you need modification">
+>
+
+
+<button>
+Request Modification
+</button>
+
+
+</form>
+
+
+
+<% } %>
     </div>
   </div>
   <% }) %>

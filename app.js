@@ -24,6 +24,9 @@ const rateLimit=require("express-rate-limit");
 const dbUrl=process.env.ATLASDB_URL;
 const bookingRouter=require("./routes/booking.js");
 const wishlistRouter=require("./routes/wishlist.js");
+const hostRouter=require("./routes/host");
+const Listing = require("./models/listing.js");
+
 
 main().then(()=>{
     console.log("Connected to DB");
@@ -97,13 +100,46 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use((req,res,next)=>{
+// app.use((req,res,next)=>{
+//     res.locals.success=req.flash("success");
+//     res.locals.error=req.flash("error");
+//     res.locals.currUser=req.user;
+//     next();
+// })
+app.use(async(req,res,next)=>{
+
     res.locals.success=req.flash("success");
     res.locals.error=req.flash("error");
+
     res.locals.currUser=req.user;
+
+
+    if(req.user){
+
+        const userListings =
+        await Listing.find({
+            owner:req.user._id
+        });
+
+
+        res.locals.isHost =
+        userListings.length > 0;
+
+
+    }else{
+
+
+        res.locals.isHost=false;
+
+
+    }
+
+
     next();
+
 })
 app.use("/bookings",bookingRouter);
+app.use("/host",hostRouter);
 app.use("/wishlist",wishlistRouter);
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);

@@ -1,0 +1,122 @@
+<% layout("/layouts/boilerplate") %>
+
+
+<h1>
+Host Dashboard
+</h1>
+
+
+<% if(bookings.length===0){ %>
+
+<h3>
+No pending requests
+</h3>
+
+<% } %>
+
+
+
+<% bookings.forEach(booking=>{ %>
+
+
+<div class="card p-3 mb-3">
+
+
+<h3>
+<%= booking.listing.title %>
+</h3>
+
+
+<p>
+Guest:
+<%= booking.guest.username %>
+</p>
+
+
+
+<p>
+Request:
+<%= booking.status %>
+</p>
+
+
+
+<p>
+Current dates:
+
+<%= booking.checkIn.toDateString() %>
+
+-
+
+<%= booking.checkOut.toDateString() %>
+
+</p>
+
+
+
+<% if(booking.status==="modify-requested"){ %>
+
+
+<hr>
+
+
+<h5>
+Requested Changes
+</h5>
+
+
+<p>
+
+New dates:
+
+<%= booking.modificationRequest.newCheckIn.toDateString() %>
+
+-
+
+<%= booking.modificationRequest.newCheckOut.toDateString() %>
+
+
+</p>
+
+
+<p>
+
+Reason:
+
+<%= booking.modificationRequest.reason %>
+
+</p>
+
+
+<% } %>
+
+<form method="POST"
+action="/host/booking/<%=booking._id%>/approve">
+
+
+<button class="btn btn-success">
+
+Approve
+
+</button>
+
+</form>
+
+
+
+<form method="POST"
+action="/host/booking/<%=booking._id%>/reject">
+
+
+<button class="btn btn-danger">
+
+Reject
+
+</button>
+
+</form>
+
+</div>
+
+
+<% }) %>

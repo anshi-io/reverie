@@ -194,6 +194,25 @@ Trips
 </a>
 
         <% } %>
+        <% if(currUser && isHost){ %>
+
+
+<li class="nav-item">
+
+<a class="nav-link"
+href="/host/dashboard">
+
+Requests
+
+</a>
+
+
+</li>
+
+
+<% } %>
+
+
         <a class="nav-link" href="/listings/new">Host a Reverie</a>
         <% if(!currUser) { %>
           <a class="nav-link" href="/signup"><b>Sign Up</b></a>

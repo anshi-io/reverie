@@ -40,5 +40,22 @@ router.get(
     wrapAsync(bookingController.myBookings)
 );
 
+// cancel request
+
+router.post(
+    "/:id/cancel",
+    isLoggedIn,
+    wrapAsync(bookingController.requestCancel)
+);
+
+
+// modify request
+
+router.post(
+    "/:id/modify",
+    isLoggedIn,
+    wrapAsync(bookingController.requestModify)
+);
+
 
 module.exports = router;

@@ -86,3 +86,33 @@ module.exports.isReviewAuthor = async(req,res,next) => {
     
     next();
 };
+
+
+module.exports.isHost = async(req,res,next)=>{
+
+
+const listings =
+await Listing.find({
+owner:req.user._id
+});
+
+
+if(listings.length===0){
+
+
+req.flash(
+"error",
+"You are not a host"
+);
+
+
+return res.redirect("/listings");
+
+
+}
+
+
+next();
+
+
+}

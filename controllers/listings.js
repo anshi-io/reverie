@@ -1,4 +1,5 @@
 const Listing = require("../models/listing");
+const User = require("../models/user");
 const Category = require("../models/category");
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mbxTilesets = require('@mapbox/mapbox-sdk/services/geocoding');
@@ -190,6 +191,15 @@ newListing.geometry =
 response.body.features[0].geometry;
 await newListing.save();
 
+const currentUser =
+await User.findById(req.user._id);
+
+
+currentUser.role="host";
+
+
+await currentUser.save();
+
 req.flash(
 "success",
 "Listing created"
@@ -274,21 +284,67 @@ req.flash("success","Listing Updated!!");
 
 res.redirect(`/listings/${id}`);
 };
-
 module.exports.deleteListing=async(req,res)=>{
 
-    let {id}=req.params;
-    let listing=await Listing.findById(id);
 
-    for(let img of listing.images){
-        await cloudinary.uploader.destroy(img.filename);
-    }
+let {id}=req.params;
 
-    await Listing.findByIdAndDelete(id);
-    req.flash("success","Listing Deleted Successfully");
-    res.redirect("/listings");
+
+let listing =
+await Listing.findById(id);
+
+
+
+for(let img of listing.images){
+
+await cloudinary.uploader.destroy(
+img.filename
+);
+
 }
 
+
+
+await Listing.findByIdAndDelete(id);
+
+
+
+// CHECK REMAINING LISTINGS
+
+const remainingListings =
+await Listing.find({
+owner:req.user._id
+});
+
+
+
+if(remainingListings.length===0){
+
+
+const user =
+await User.findById(req.user._id);
+
+
+user.role="guest";
+
+
+await user.save();
+
+
+}
+
+
+
+req.flash(
+"success",
+"Listing Deleted Successfully"
+);
+
+
+res.redirect("/listings");
+
+
+}
 module.exports.deleteImage = async(req,res)=>{
     let {id,filename}=req.params;
     filename = decodeURIComponent(filename);

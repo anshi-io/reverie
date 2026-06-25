@@ -36,16 +36,54 @@ const bookingSchema = new Schema({
         type:Number,
         required:true
     },
-
+    
     status:{
-        type:String,
-        enum:[
-            "confirmed",
-            "cancelled"
-        ],
-        default:"confirmed"
+    type:String,
+    enum:[
+        "confirmed",
+        "cancel-requested",
+        "cancelled",
+        "modify-requested",
+        "modified"
+    ],
+    default:"confirmed"
+    },
+
+
+modificationRequest:{
+
+    newCheckIn:{
+        type:Date
+    },
+
+    newCheckOut:{
+        type:Date
+    },
+
+    newGuests:{
+        type:Number
+    },
+
+    reason:{
+        type:String
     }
 
+   },
+
+
+hostResponse:{
+
+    type:String,
+
+    enum:[
+        "pending",
+        "approved",
+        "rejected"
+    ],
+
+    default:"pending"
+
+}
 },
 {
     timestamps:true
