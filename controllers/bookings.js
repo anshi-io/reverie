@@ -30,6 +30,9 @@ const alreadyBooked =
 await Booking.findOne({
 
 listing:listing._id,
+status:{
+$ne:"cancelled"
+},
 
 
 checkOut:{
@@ -168,6 +171,9 @@ return res.redirect(
     await Booking.findOne({
 
         listing:listing._id,
+        status:{
+$ne:"cancelled"
+},
 
         checkOut:{
             $gte:start
@@ -302,11 +308,13 @@ return res.redirect("/bookings");
 }
 
 
+booking.status="cancelled";
 
-booking.status="cancel-requested";
+booking.cancelReason =
+req.body.reason || "No reason provided";
 
-booking.hostResponse="pending";
 
+await booking.save();
 
 await booking.save();
 
@@ -358,7 +366,19 @@ new Date(checkIn);
 const newEnd =
 new Date(checkOut);
 
+if(newEnd <= newStart){
 
+
+req.flash(
+"error",
+"Checkout date must be after checkin date"
+);
+
+
+return res.redirect("/bookings");
+
+
+}
 
 
 // checking date conflict

@@ -1,122 +1,89 @@
 <% layout("/layouts/boilerplate") %>
-
-
-<h1>
-Host Dashboard
-</h1>
-
-
-<% if(bookings.length===0){ %>
-
-<h3>
-No pending requests
-</h3>
-
-<% } %>
-
-
-
-<% bookings.forEach(booking=>{ %>
-
-
-<div class="card p-3 mb-3">
-
-
-<h3>
-<%= booking.listing.title %>
-</h3>
-
-
-<p>
-Guest:
-<%= booking.guest.username %>
-</p>
-
-
-
-<p>
-Request:
-<%= booking.status %>
-</p>
-
-
-
-<p>
-Current dates:
-
-<%= booking.checkIn.toDateString() %>
-
--
-
-<%= booking.checkOut.toDateString() %>
-
-</p>
-
-
-
-<% if(booking.status==="modify-requested"){ %>
-
-
-<hr>
-
-
-<h5>
-Requested Changes
-</h5>
-
-
-<p>
-
-New dates:
-
-<%= booking.modificationRequest.newCheckIn.toDateString() %>
-
--
-
-<%= booking.modificationRequest.newCheckOut.toDateString() %>
-
-
-</p>
-
-
-<p>
-
-Reason:
-
-<%= booking.modificationRequest.reason %>
-
-</p>
-
-
-<% } %>
-
-<form method="POST"
-action="/host/booking/<%=booking._id%>/approve">
-
-
-<button class="btn btn-success">
-
-Approve
-
-</button>
-
-</form>
-
-
-
-<form method="POST"
-action="/host/booking/<%=booking._id%>/reject">
-
-
-<button class="btn btn-danger">
-
-Reject
-
-</button>
-
-</form>
-
-</div>
-
-
-<% }) %>
+<div class="host-dash">
+  <h1 class="host-dash-heading">
+    <i class="fa-solid fa-house-flag"></i> Host Dashboard
+  </h1>
+
+  <% if(bookings.length===0){ %>
+    <p class="host-dash-empty">No pending requests</p>
+  <% } %>
+
+  <div class="host-req-grid">
+  <% bookings.forEach(booking=>{ %>
+    <div class="host-req-card">
+
+      <div class="host-req-header">
+        <div>
+          <h3 class="host-req-title"><%= booking.listing.title %></h3>
+          <p class="host-req-guest">
+            <i class="fa-solid fa-user"></i> <%= booking.guest.username %>
+          </p>
+        </div>
+        <span class="host-req-badge <%= booking.status %>">
+          <%= booking.status %>
+        </span>
+      </div>
+
+      <div class="host-req-meta">
+        <span><i class="fa-solid fa-calendar"></i>
+          <b><%= booking.checkIn.toDateString() %></b>
+        </span>
+        <span>→</span>
+        <span><b><%= booking.checkOut.toDateString() %></b></span>
+      </div>
+
+      <% if(booking.status==="modify-requested"){ %>
+        <div class="host-mod-block">
+          <h6>Requested Changes</h6>
+          <p>New check-in: <b><%= booking.modificationRequest.newCheckIn.toDateString() %></b></p>
+          <p>New check-out: <b><%= booking.modificationRequest.newCheckOut.toDateString() %></b></p>
+          <p>Reason: <b><%= booking.modificationRequest.reason %></b></p>
+        </div>
+      <% } %>
+
+      <div class="host-req-actions">
+        <form method="POST" action="/host/booking/<%=booking._id%>/approve">
+          <button class="btn-host-approve" type="submit">
+            <i class="fa-solid fa-check"></i> Approve
+          </button>
+        </form>
+        <form method="POST" action="/host/booking/<%=booking._id%>/reject">
+          <button class="btn-host-reject" type="submit">
+            <i class="fa-solid fa-xmark"></i> Reject
+          </button>
+        </form>
+      </div>
+
+    </div>
+  <% }) %>
+  </div>
+
+  <h2 class="host-dash-section">Cancelled Reservations</h2>
+
+  <div class="host-req-grid">
+  <% cancelledBookings.forEach(booking=>{ %>
+    <div class="host-cancelled-card">
+      <div class="host-req-header">
+        <div>
+          <h4 class="host-req-title"><%= booking.listing.title %></h4>
+          <p class="host-req-guest">
+            <i class="fa-solid fa-user"></i> <%= booking.guest.username %>
+          </p>
+        </div>
+        <span class="host-req-badge cancelled">Cancelled</span>
+      </div>
+      <div class="host-req-meta">
+        <span><i class="fa-solid fa-calendar"></i>
+          <b><%= booking.checkIn.toDateString() %></b>
+        </span>
+        <span>→</span>
+        <span><b><%= booking.checkOut.toDateString() %></b></span>
+      </div>
+      <p class="host-cancel-reason">
+        <b>Reason:</b> <%= booking.cancelReason || "No reason provided" %>
+      </p>
+    </div>
+  <% }) %>
+  </div>
+
+</div><%# end .host-dash %>

@@ -16,25 +16,29 @@ isHost,
 wrapAsync(async(req,res)=>{
 
 
-const bookings = await Booking.find({
-
-status:{
-$in:[
-"cancel-requested",
-"modify-requested"
-]
-}
-
+const modificationRequests =
+await Booking.find({
+status:"modify-requested"
 })
 .populate("listing")
 .populate("guest");
 
 
 
+const cancelledBookings =
+await Booking.find({
+status:"cancelled"
+})
+.populate("listing")
+.populate("guest");
+
+
 res.render(
 "host/dashboard",
 {
-bookings
+bookings: modificationRequests,
+
+cancelledBookings
 }
 );
 
@@ -49,10 +53,8 @@ wrapAsync(async(req,res)=>{
 
 
 const booking =
-await Booking.findById(req.params.id);
-
-
-
+await Booking.findById(req.params.id)
+.populate("listing");
 if(
 booking.status==="cancel-requested"
 ){
@@ -82,8 +84,20 @@ booking.guests =
 booking.modificationRequest.newGuests;
 
 
-booking.status="modified";
+const nights = Math.ceil(
+(
+booking.modificationRequest.newCheckOut -
+booking.modificationRequest.newCheckIn
+)
+/(1000*60*60*24)
+);
 
+
+booking.totalPrice =
+booking.listing.price * nights;
+
+
+booking.status="modified";
 
 }
 

@@ -69,6 +69,9 @@ modificationRequest:{
     }
 
    },
+   cancelReason:{
+    type:String
+},
 
 
 hostResponse:{
@@ -78,11 +81,11 @@ hostResponse:{
     enum:[
         "pending",
         "approved",
-        "rejected"
+        "rejected",
+        null
     ],
 
-    default:"pending"
-
+    default:null,
 }
 },
 {
