@@ -24,32 +24,21 @@
       </div>
       <p class="booking-total">Total: <span>₹<%= booking.totalPrice.toLocaleString("en-IN") %></span></p>
       <span class="booking-badge <%= booking.status %>"><%= booking.status %></span>
-      <% if(
-(booking.status==="modify-requested" || 
- booking.status==="cancel-requested")
-&& 
-booking.hostResponse==="pending"
-){ %>
+      <% if( 
+          (booking.status==="modify-requested" || 
+            booking.status==="cancel-requested")
+            && 
+            booking.hostResponse==="pending"){ %>
 
-<div class="alert alert-warning mt-2">
-
-Your request is waiting for host approval.
-
-</div>
-
-<% } %>
-
-
-
-<% if(booking.hostResponse==="approved"){ %>
-
-<div class="alert alert-success mt-2">
-
-Your request has been approved by the host.
-
-</div>
-
-<% } %>
+          <div class="alert alert-warning mt-2">
+            Your request is waiting for host approval.
+          </div>
+      <% } %>
+      <% if(booking.hostResponse==="approved"){ %>
+    <div class="alert alert-success mt-2">
+      Your request has been approved by the host.
+    </div>
+    <% } %>
 
 
 
