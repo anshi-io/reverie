@@ -35,24 +35,16 @@
           </div>
       <% } %>
       <% if(booking.hostResponse==="approved"){ %>
-    <div class="alert alert-success mt-2">
-      Your request has been approved by the host.
-    </div>
-    <% } %>
+         <div class="alert alert-success mt-2">
+          Your request has been approved by the host.
+         </div>
+      <% } %>
 
-
-
-<% if(booking.hostResponse==="rejected"){ %>
-
-<div class="alert alert-danger mt-2">
-
-Your request has been rejected by the host.
-
-Your original booking is still active.
-
-</div>
-
-<% } %>
+      <% if(booking.hostResponse==="rejected"){ %>
+        <div class="alert alert-danger mt-2">
+             Your request has been rejected by the host.Your original booking is still active.
+        </div>
+      <% } %>
       <% if(booking.status==="confirmed"){ %>
 
 
