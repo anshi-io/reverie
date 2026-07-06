@@ -1,50 +1,18 @@
 const hostController = require("../controllers/host");
 const express = require("express");
 const router = express.Router();
-
-const Booking = require("../models/booking");
 const wrapAsync = require("../utils/wrapAsync");
+const Booking = require("../models/booking");
 const {
 isLoggedIn,
 isHost
 }=require("../middleware");
 
-
 router.get(
-"/dashboard",
-isLoggedIn,
-isHost,
-wrapAsync(async(req,res)=>{
-
-
-const modificationRequests =
-await Booking.find({
-status:"modify-requested"
-})
-.populate("listing")
-.populate("guest");
-
-
-
-const cancelledBookings =
-await Booking.find({
-status:"cancelled"
-})
-.populate("listing")
-.populate("guest");
-
-
-res.render(
-"host/dashboard",
-{
-bookings: modificationRequests,
-
-cancelledBookings
-}
-);
-
-
-})
+    "/dashboard",
+    isLoggedIn,
+    isHost,
+    wrapAsync(hostController.dashboard)
 );
 router.post(
 "/booking/:id/approve",
@@ -166,5 +134,11 @@ res.redirect("/host/dashboard");
 
 
 })
+);
+router.post(
+"/reorder",
+isLoggedIn,
+isHost,
+wrapAsync(hostController.reorderListings)
 );
 module.exports = router;

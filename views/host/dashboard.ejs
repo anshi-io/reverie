@@ -57,6 +57,57 @@
     </div>
   <% }) %>
   </div>
+  <hr class="my-5">
+
+<h2 class="host-dash-section">
+Your Listings
+</h2>
+
+<p class="text-muted mb-4">
+Drag and drop to choose the order guests see your properties.
+</p>
+
+<div
+id="sortableListings"
+class="host-listing-grid"
+>
+
+<% hostListings.forEach(listing=>{ %>
+
+<div
+class="host-listing-card"
+data-id="<%= listing._id %>"
+>
+
+<img
+src="<%= listing.images[0]?.url %>"
+>
+
+<div class="host-listing-content">
+
+<h5>
+<%= listing.title %>
+</h5>
+
+<p>
+
+<%= listing.location %>
+
+</p>
+
+</div>
+
+<div class="drag-icon">
+
+<i class="fa-solid fa-grip-lines"></i>
+
+</div>
+
+</div>
+
+<% }) %>
+
+</div>
 
   <h2 class="host-dash-section">Cancelled Reservations</h2>
 
@@ -87,3 +138,4 @@
   </div>
 
 </div><%# end .host-dash %>
+<script src="/js/hostDrag.js"></script>

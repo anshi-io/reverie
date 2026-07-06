@@ -128,6 +128,82 @@
         </div>
       
     </div>
+    <% if(currUser && recentlyViewed.length > 0){ %>
+
+<section class="continue-section">
+
+<div class="continue-heading">
+
+<h2>
+Where your journey paused...
+</h2>
+
+<p>
+Your last escapes are waiting for you.
+</p>
+
+</div>
+
+<div class="row">
+
+<% recentlyViewed.forEach(listing=>{ %>
+
+<div class="col-lg-4">
+
+<a
+href="/listings/<%= listing._id %>"
+class="listing-link"
+>
+<div class="card listing-card h-100">
+
+<img
+src="<%= listing.images[0]?.url %>"
+class="card-img-top"
+>
+
+<div class="card-body">
+
+<h5>
+<%= listing.title %>
+</h5>
+
+<p class="text-muted">
+
+<%= listing.location %>
+
+</p>
+<i class="fa-regular fa-clock"></i>
+
+Viewed recently
+<b>
+
+₹<%= listing.price.toLocaleString("en-IN") %>/night
+
+</b>
+
+<a
+href="/listings/<%= listing._id %>"
+class="continue-link"
+>
+
+Continue →
+
+</a>
+
+</div>
+</div>
+
+</a>
+
+</div>
+
+<% }) %>
+
+</div>
+
+</section>
+
+<% } %>
     <div id="listing-container" class="row row-cols-lg-3 row-cols-med-2 row-cols-sm-1 mt-3">
     <% for(let listing of allListings){%>
         <a href="/listings/<%=listing._id%>" class="listing-link">

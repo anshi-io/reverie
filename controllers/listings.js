@@ -30,13 +30,28 @@ module.exports.index = async (req, res) => {
     }
     
     const listings = await Listing.find(filter)
-        .skip(skip)
-        .limit(limit)
-        .populate("categories"); 
+    .sort({
+        displayOrder: 1,
+        createdAt: -1
+    })
+    .skip(skip)
+    .limit(limit)
+    .populate("categories");
     const categories = await Category.find({});
+    let recentlyViewed = [];
+
+if(req.user){
+
+    const user = await User.findById(req.user._id)
+        .populate("recentlyViewed");
+
+    recentlyViewed = user.recentlyViewed;
+
+}
     res.render("listings/index", {
         allListings: listings,
         search,
+        recentlyViewed,
         categorySelected: req.query.category,
         categories
     });
@@ -62,6 +77,10 @@ module.exports.loadMore = async (req, res) => {
     }
 
     const listings = await Listing.find(filter)
+        .sort({
+        displayOrder: 1,
+        createdAt: -1
+        })
         .skip((page - 1) * limit)
         .limit(limit)
         .populate("categories");
@@ -112,6 +131,24 @@ module.exports.showListing=async(req,res)=>{
         req.flash("error","Listing you requested for does not exist!!");
         return res.redirect("/listings");
     }
+    if (req.user) {
+
+    const user = await User.findById(req.user._id);
+
+    // Remove if already exists
+    user.recentlyViewed = user.recentlyViewed.filter(
+        id => id.toString() !== listing._id.toString()
+    );
+
+    // Add to the beginning
+    user.recentlyViewed.unshift(listing._id);
+
+    // Keep only latest 3
+    user.recentlyViewed = user.recentlyViewed.slice(0, 3);
+
+    await user.save();
+
+}
     const similarListings = await Listing.find({
     categories: listing.categories,
     _id: { $ne: listing._id }

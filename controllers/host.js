@@ -2,7 +2,8 @@ const Booking = require("../models/booking");
 const Listing = require("../models/listing");
 
 module.exports.dashboard = async (req, res) => {
-
+ 
+    
     const modificationRequests = await Booking.find({
         status: "modify-requested"
     })
@@ -24,6 +25,37 @@ module.exports.dashboard = async (req, res) => {
         bookings: modificationRequests,
         cancelledBookings,
         hostListings
+    });
+
+};
+
+module.exports.reorderListings = async (req, res) => {
+
+    const { order } = req.body;
+
+    if (!Array.isArray(order)) {
+        return res.status(400).json({
+            success: false,
+            message: "Invalid order data."
+        });
+    }
+
+    for (let i = 0; i < order.length; i++) {
+
+        await Listing.findOneAndUpdate(
+            {
+                _id: order[i],
+                owner: req.user._id
+            },
+            {
+                displayOrder: i
+            }
+        );
+
+    }
+
+    res.json({
+        success: true
     });
 
 };
