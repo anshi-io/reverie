@@ -1,3 +1,4 @@
+const hostController = require("../controllers/host");
 const express = require("express");
 const router = express.Router();
 
