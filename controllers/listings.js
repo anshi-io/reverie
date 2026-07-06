@@ -95,18 +95,19 @@ module.exports.showListing=async(req,res)=>{
     ]}]}]}]}]}]}
     ).populate("categories")
     .populate("owner");
+    // Don't count the host viewing their own listing
+    if (
+    !req.user ||
+    !listing.owner._id.equals(req.user._id)
+    ) {
+    listing.views += 1;
+    await listing.save();
+    }
     let isWishlisted = false;
-
-
-
-if(req.user){
-
-
-isWishlisted =
-req.user.wishlist.includes(listing._id);
-
-
-}
+    if(req.user){
+      isWishlisted =
+      req.user.wishlist.includes(listing._id);
+    }
     if(!listing){
         req.flash("error","Listing you requested for does not exist!!");
         return res.redirect("/listings");

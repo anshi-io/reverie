@@ -45,7 +45,22 @@ const listingSchema=new Schema({
         type:Schema.Types.ObjectId,
         ref:"Booking"
     }
-],
+    ],
+    views: {
+    type: Number,
+    default: 0
+    },
+
+    displayOrder: {
+    type: Number,
+    default: 0
+    },
+
+    averageRating: {
+    type: Number,
+    default: 0
+    },
+    
     geometry: {
     type: {
       type: String, // Don't do `{ location: { type: String } }`
