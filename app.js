@@ -26,6 +26,7 @@ const bookingRouter=require("./routes/booking.js");
 const wishlistRouter=require("./routes/wishlist.js");
 const hostRouter=require("./routes/host");
 const Listing = require("./models/listing.js");
+const adminRouter = require("./routes/admin");
 
 
 main().then(()=>{
@@ -144,6 +145,7 @@ app.use("/wishlist",wishlistRouter);
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
 app.use("/",userRouter);
+app.use("/admin", adminRouter);
 
 
 app.use((req,res,next)=>{

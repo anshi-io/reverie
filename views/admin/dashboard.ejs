@@ -1,0 +1,32 @@
+<% layout("/layouts/boilerplate") %>
+
+<h1 class="mb-5">
+    Platform Manager
+</h1>
+
+<p>
+    Welcome,
+    <%= currUser.username %>
+</p>
+
+<hr>
+
+<h3>
+
+Categories
+
+</h3>
+
+<ul>
+
+<% categories.forEach(category=>{ %>
+
+<li>
+
+<%= category.name %>
+
+</li>
+
+<% }) %>
+
+</ul>
