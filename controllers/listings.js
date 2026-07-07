@@ -9,12 +9,13 @@ const crypto = require("crypto");
 const {cloudinary} = require("../cloud_config.js");
 
 module.exports.index = async (req, res) => {
+
     const page = parseInt(req.query.page) || 1;
     const limit = 9;
     const skip = (page - 1) * limit;
     const search = req.query.search?.trim();
     const category = req.query.category; 
-
+      
     let filter = {};
      if (category && category !== "all") {
         filter.categories = category; // must be ObjectId from frontend
@@ -228,13 +229,12 @@ newListing.imageHashes=hashes;
 newListing.geometry =
 response.body.features[0].geometry;
 await newListing.save();
-
 const currentUser =
 await User.findById(req.user._id);
 
-
-currentUser.role="host";
-
+if(currentUser.role !== "super-admin"){
+    currentUser.role = "host";
+}
 
 await currentUser.save();
 
@@ -355,23 +355,18 @@ owner:req.user._id
 });
 
 
-
 if(remainingListings.length===0){
-
 
 const user =
 await User.findById(req.user._id);
 
-
-user.role="guest";
-
+if(user.role !== "super-admin"){
+    user.role = "guest";
+}
 
 await user.save();
 
-
 }
-
-
 
 req.flash(
 "success",

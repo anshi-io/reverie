@@ -16,7 +16,8 @@ const userSchema = new Schema({
 
         enum:[
             "guest",
-            "host"
+            "host",
+            "super-admin"
         ],
 
         default:"guest"

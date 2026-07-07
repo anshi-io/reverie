@@ -116,3 +116,29 @@ next();
 
 
 }
+
+module.exports.isSuperAdmin = (req, res, next) => {
+
+    if (!req.user) {
+
+        req.flash(
+            "error",
+            "Please login first."
+        );
+
+        return res.redirect("/login");
+    }
+
+    if (req.user.role !== "super-admin") {
+
+        req.flash(
+            "error",
+            "You are not authorized to access this page."
+        );
+
+        return res.redirect("/listings");
+    }
+
+    next();
+
+};
