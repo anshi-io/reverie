@@ -228,6 +228,24 @@ newListing.images=images;
 newListing.imageHashes=hashes;
 newListing.geometry =
 response.body.features[0].geometry;
+const lastListing =
+await Listing.findOne({
+
+    categories:newListing.categories
+
+})
+.sort({
+
+    displayOrder:-1
+
+});
+
+newListing.displayOrder =
+lastListing
+?
+lastListing.displayOrder+1
+:
+0;
 await newListing.save();
 const currentUser =
 await User.findById(req.user._id);

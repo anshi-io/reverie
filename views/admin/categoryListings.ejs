@@ -1,0 +1,88 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container py-5">
+
+<h1 class="mb-4">
+
+<%= category.name %> Listings
+
+</h1>
+
+<p class="text-muted">
+
+Drag listings to arrange how they appear to users.
+
+</p>
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>
+        <%= category.name %> Listings
+    </h2>
+    <span
+id="changesBadge"
+class="badge bg-warning text-dark d-none"
+>
+Unsaved Changes
+</span>
+    <button
+        id="saveOrderBtn"
+        class="btn btn-dark"
+        disabled
+    >
+        Save Order
+    </button>
+
+</div>
+<div
+id="sortableListings"
+class="host-listing-grid"
+data-save-url="/admin/categories/<%= category._id %>/reorder"
+>
+
+<% listings.forEach((listing,index)=>{ %>
+
+<div
+class="admin-listing-card"
+data-id="<%= listing._id %>"
+>
+
+<img
+src="<%= listing.images[0]?.url %>"
+>
+
+<div class="host-listing-content">
+
+<h5>
+
+<%= listing.title %>
+
+</h5>
+
+<p>
+
+Host:
+
+<%= listing.owner.username %>
+
+</p>
+
+</div>
+
+<div class="drag-icon">
+
+<i class="fa-solid fa-grip-lines"></i>
+<div class="listing-rank">
+    #<%= index + 1 %>
+</div>
+
+</div>
+
+</div>
+
+<% }) %>
+
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+<script src="/js/sortableManager.js"></script>

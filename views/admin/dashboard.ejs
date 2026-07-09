@@ -1,32 +1,28 @@
 <% layout("/layouts/boilerplate") %>
 
-<h1 class="mb-5">
-    Platform Manager
+<div class="container py-5">
+
+<h1>
+
+Platform Manager
+
 </h1>
 
 <p>
-    Welcome,
-    <%= currUser.username %>
+
+Welcome,
+
+<%= currUser.username %>
+
 </p>
 
-<hr>
+<a
+href="/admin/categories"
+class="btn btn-dark mt-3"
+>
 
-<h3>
+Manage Categories
 
-Categories
+</a>
 
-</h3>
-
-<ul>
-
-<% categories.forEach(category=>{ %>
-
-<li>
-
-<%= category.name %>
-
-</li>
-
-<% }) %>
-
-</ul>
+</div>

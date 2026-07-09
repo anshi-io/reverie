@@ -113,6 +113,8 @@ app.use(async(req,res,next)=>{
     res.locals.error=req.flash("error");
 
     res.locals.currUser=req.user;
+    res.locals.isSuperAdmin =
+        req.user?.role === "super-admin";
 
 
     if(req.user){
