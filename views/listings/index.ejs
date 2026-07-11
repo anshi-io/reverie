@@ -67,22 +67,13 @@ class="card-img-top"
 <%= listing.location %>
 
 </p>
-<i class="fa-regular fa-clock"></i>
-
-Viewed recently
-<b>
-
-₹<%= listing.price.toLocaleString("en-IN") %>/night
-
-</b>
-
-<a
-href="/listings/<%= listing._id %>"
-class="continue-link"
->
-
-Continue →
-
+<div class="continue-viewed-row">
+  <i class="fa-regular fa-clock"></i>
+  <span>Viewed recently</span>
+  <b>₹<%= listing.price.toLocaleString("en-IN") %>/night</b>
+</div>
+<a href="/listings/<%= listing._id %>" class="continue-link">
+  Continue <i class="fa-solid fa-arrow-right-long"></i>
 </a>
 
 </div>

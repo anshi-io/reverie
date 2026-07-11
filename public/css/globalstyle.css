@@ -966,3 +966,354 @@ img { display: block; max-width: 100%; }
   .host-req-meta { font-size: .82rem; gap: .4rem .9rem; }
   .host-listing-card img, .admin-listing-card img { width: 60px; height: 50px; }
 }
+
+
+/* ══════════════════════════════════════════════════════════════
+   21. RECENTLY VIEWED / CONTINUE SECTION
+   ══════════════════════════════════════════════════════════════ */
+.continue-section {
+  position: relative;
+  margin: 2.25rem 0 2.5rem;
+  padding: 2rem 2rem 2.25rem;
+  background: linear-gradient(135deg, #fff7f8 0%, #fff1f3 55%, #fff 100%);
+  border: 1.5px solid var(--brand-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+/* Decorative brand accent blob top-right */
+.continue-section::before {
+  content: "";
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,56,92,.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Section heading block */
+.continue-heading {
+  margin-bottom: 1.5rem;
+}
+.continue-heading h2 {
+  font-size: clamp(1.3rem, 2.5vw, 1.65rem);
+  font-weight: 800;
+  letter-spacing: -.4px;
+  color: var(--dark);
+  margin: 0 0 .3rem;
+  display: flex; align-items: center; gap: .55rem;
+}
+/* Flame icon before the heading */
+.continue-heading h2::before {
+  content: "\f54e"; /* fa-person-running but we use clock */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: .9em;
+  color: var(--brand);
+}
+.continue-heading p {
+  color: var(--mid);
+  font-size: .88rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Card row — horizontal scroll on all screens, fixed-width cards */
+.continue-section .row {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 1.1rem !important;
+  overflow-x: auto;
+  padding-bottom: .5rem;
+  margin: 0 !important;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.continue-section .row::-webkit-scrollbar { display: none; }
+
+/* Each column: fixed width so they feel like a real carousel */
+.continue-section .col-lg-4 {
+  flex: 0 0 280px !important;
+  max-width: 280px !important;
+  padding: 0 !important;
+  width: auto !important;
+}
+
+/* The card itself */
+.continue-section .listing-card {
+  border-radius: var(--radius-lg) !important;
+  background: var(--surface) !important;
+  border: 1.5px solid var(--border) !important;
+  box-shadow: var(--shadow-sm) !important;
+  overflow: hidden;
+  transition:
+    transform var(--ease-t) var(--ease),
+    box-shadow var(--ease-t) var(--ease);
+  margin-bottom: 0 !important;
+  display: flex !important;
+  flex-direction: column;
+}
+.continue-section .listing-card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* Image */
+.continue-section .card-img-top {
+  width: 100% !important;
+  height: 172px !important;
+  object-fit: cover !important;
+  border-radius: 0 !important;
+  display: block;
+  transition: transform .4s var(--ease);
+}
+.continue-section .listing-card:hover .card-img-top {
+  transform: scale(1.04);
+}
+
+/* Card body */
+.continue-section .card-body {
+  padding: .9rem 1rem 1rem !important;
+  background: var(--surface) !important;
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  flex: 1;
+}
+
+/* Title */
+.continue-section .card-body h5 {
+  font-size: .95rem;
+  font-weight: 800;
+  color: var(--dark);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Location */
+.continue-section .card-body .text-muted {
+  font-size: .8rem;
+  color: var(--mid) !important;
+  margin: 0;
+}
+
+/* "Viewed recently" row */
+.continue-section .card-body > i.fa-regular {
+  color: var(--brand);
+  font-size: .78rem;
+}
+.continue-section .card-body b {
+  font-size: .85rem;
+  font-weight: 800;
+  color: var(--dark);
+}
+
+/* Viewed recently + price line — wrap in a flex row */
+.continue-viewed-row {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  margin-top: .3rem;
+  font-size: .8rem;
+  color: var(--mid);
+}
+.continue-viewed-row i { color: var(--brand); font-size: .75rem; }
+.continue-viewed-row b { color: var(--dark); font-weight: 800; font-size: .88rem; }
+
+/* "Continue →" CTA */
+.continue-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  margin-top: .55rem;
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--brand) !important;
+  text-decoration: none;
+  letter-spacing: .2px;
+  transition: gap var(--ease-t) var(--ease), color var(--ease-t) var(--ease);
+}
+.continue-link:hover {
+  color: var(--brand-hover) !important;
+  gap: .55rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 767.98px) {
+  .continue-section { padding: 1.4rem 1.1rem 1.6rem; margin: 1.5rem 0 2rem; }
+  .continue-section .col-lg-4 { flex: 0 0 240px !important; max-width: 240px !important; }
+  .continue-section .card-img-top { height: 145px !important; }
+}
+@media (max-width: 480px) {
+  .continue-section { padding: 1.2rem .9rem 1.4rem; border-radius: var(--radius-lg); }
+  .continue-section .col-lg-4 { flex: 0 0 210px !important; max-width: 210px !important; }
+  .continue-section .card-img-top { height: 130px !important; }
+  .continue-heading h2 { font-size: 1.2rem; }
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   22. PLATFORM CATEGORIES PAGE  (/admin/categories)
+   Replaces raw Bootstrap .card shadow-sm
+   ══════════════════════════════════════════════════════════════ */
+
+/* Page wrapper — scoped to the admin categories container */
+.admin-categories-page { padding: 2.5rem 0 4rem; }
+
+.admin-categories-page h1 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800; letter-spacing: -.5px; margin-bottom: 2rem;
+}
+
+/* Override the Bootstrap .row grid with a proper CSS grid */
+.admin-categories-page .row {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 1.25rem !important;
+  margin: 0 !important;
+}
+.admin-categories-page .row > div {
+  padding: 0 !important;
+  max-width: 100% !important;
+}
+
+/* Category card */
+.admin-categories-page .card {
+  border: 1.5px solid var(--border) !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--shadow-xs) !important;
+  overflow: hidden;
+  position: relative;
+  transition:
+    transform var(--ease-t) var(--ease),
+    box-shadow var(--ease-t) var(--ease),
+    border-color var(--ease-t) var(--ease) !important;
+  background: var(--surface) !important;
+}
+
+/* Animated brand bar that slides in from left on hover */
+.admin-categories-page .card::before {
+  content: "";
+  display: block; height: 3.5px;
+  background: linear-gradient(90deg, var(--brand) 0%, var(--brand-dark) 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .28s var(--ease);
+}
+.admin-categories-page .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md) !important; border-color: var(--brand-border) !important; }
+.admin-categories-page .card:hover::before { transform: scaleX(1); }
+
+.admin-categories-page .card-body {
+  padding: 1.4rem 1.55rem 1.5rem !important;
+}
+
+.admin-categories-page h4 {
+  font-size: 1rem; font-weight: 800;
+  color: var(--dark); margin: 0 0 1rem;
+  display: flex; align-items: center; gap: .5rem;
+}
+
+/* Manage Listings button */
+.admin-categories-page .btn-outline-dark {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: .4rem !important;
+  border: 1.5px solid var(--border-strong) !important;
+  border-radius: var(--radius-xs) !important;
+  font-weight: 700 !important;
+  font-size: .8rem !important;
+  font-family: var(--font) !important;
+  color: var(--dark) !important;
+  background: var(--bg) !important;
+  padding: .44rem 1.05rem !important;
+  transition: all var(--ease-t) var(--ease) !important;
+  text-decoration: none;
+  margin-top: 0 !important;
+}
+.admin-categories-page .btn-outline-dark:hover {
+  background: var(--brand) !important;
+  border-color: var(--brand) !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 3px 12px var(--brand-glow) !important;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .admin-categories-page .row { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 576px) {
+  .admin-categories-page .row { grid-template-columns: 1fr !important; }
+  .admin-categories-page { padding: 1.5rem 0 3rem; }
+  .admin-categories-page h1 { font-size: 1.5rem; }
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   23. CATEGORY REORDER PAGE  (/admin/categories/:id)
+   Fixes duplicate heading + unstyled page layout
+   ══════════════════════════════════════════════════════════════ */
+.category-reorder-page { padding: 2.5rem 0 4rem; }
+
+/* Page-level h1 — the big title */
+.category-reorder-page > h1,
+.category-reorder-page .container > h1 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800; letter-spacing: -.5px;
+  color: var(--dark); margin-bottom: .4rem;
+}
+
+/* Subtitle */
+.category-reorder-page > p.text-muted,
+.category-reorder-page .container > p.text-muted {
+  font-size: .88rem; color: var(--mid) !important;
+  margin-bottom: 1.75rem;
+}
+
+/* Sub-header row: "Trending Listings" h2 + Save Order button */
+.category-reorder-page .d-flex {
+  align-items: center;
+  margin-bottom: 1.35rem;
+  padding-bottom: 1rem;
+  border-bottom: 1.5px solid var(--border);
+}
+.category-reorder-page .d-flex h2 {
+  font-size: 1.1rem; font-weight: 800;
+  color: var(--dark); margin: 0;
+  /* This IS the section label — keep it but make it look like one */
+  text-transform: uppercase; letter-spacing: .5px;
+  font-size: .8rem; color: var(--light);
+}
+
+/* Hide the redundant top h1 if the EJS has both
+   (the h1 with "Trending Listings" above the subtitle) */
+.category-reorder-page .container > h1:first-child + p.text-muted + .d-flex h2 {
+  display: none;
+}
+
+/* Listing rank bubble — now circular badge */
+.listing-rank {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--bg); border: 1.5px solid var(--border);
+  font-size: .68rem; font-weight: 800; color: var(--mid);
+  margin-top: .25rem;
+  transition: background var(--ease-t) var(--ease), color var(--ease-t) var(--ease);
+}
+.admin-listing-card:hover .listing-rank {
+  background: var(--brand-light);
+  color: var(--brand);
+  border-color: var(--brand-border);
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+  .category-reorder-page { padding: 1.5rem 0 3rem; }
+}
+@media (max-width: 576px) {
+  .category-reorder-page > h1 { font-size: 1.4rem; }
+}
