@@ -28,15 +28,13 @@
 <section class="continue-section">
 
 <div class="continue-heading">
-
-<h2>
-Where your journey paused...
-</h2>
+<div class="continue-heading-left">
+ <h2>Where your journey paused... <span class="continue-badge"><i class="fa-regular fa-clock"></i> Recently Viewed</span></h2>
 
 <p>
 Your last escapes are waiting for you.
 </p>
-
+</div>
 </div>
 
 <div class="row">
@@ -68,8 +66,6 @@ class="card-img-top"
 
 </p>
 <div class="continue-viewed-row">
-  <i class="fa-regular fa-clock"></i>
-  <span>Viewed recently</span>
   <b>₹<%= listing.price.toLocaleString("en-IN") %>/night</b>
 </div>
 <a href="/listings/<%= listing._id %>" class="continue-link">
